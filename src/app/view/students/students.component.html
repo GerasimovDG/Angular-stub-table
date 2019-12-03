@@ -18,14 +18,14 @@
     <input class="input view-filter__input" type="date" placeholder="По дате рождения" [(ngModel)]="birthday" (ngModelChange)="setStudentsByBirthday(birthday)">
   </div>
   <div class="view-body table-responsive">
-    <table class="table table-hover">
+    <table class="table table-hover" >
       <thead class="table-header">
-      <th>#</th>
-      <th>Фамилия</th>
-      <th>Имя</th>
-      <th>Отчество</th>
-      <th>Дата рождения</th>
-      <th>Средний балл</th>
+      <th (click)="sortTableBy('numb')">#</th>
+      <th (click)="sortTableBy('lastName')">Фамилия</th>
+      <th (click)="sortTableBy('firstName')">Имя</th>
+      <th (click)="sortTableBy('middleName')">Отчество</th>
+      <th (click)="sortTableBy('date')">Дата рождения</th>
+      <th (click)="sortTableBy('mark')">Средний балл</th>
       <th></th>
       </thead>
       <tbody class="table-body">

@@ -79,4 +79,44 @@ export class StudentsComponent implements OnInit {
       });
     }
   }
+
+  sortTableBy(by: string): void {
+    switch (by) {
+      case "numb":
+        this.students.sort((first: Student, second: Student) => {
+          return first.id >= second.id ? 1 : -1;
+        });
+        break;
+      case "lastName":
+        this.students.sort((first: Student, second: Student) => {
+          return first.lastName >= second.lastName ? 1 : -1;
+        });
+        break;
+      case "firstName":
+        this.students.sort((first: Student, second: Student) => {
+          return first.firstName >= second.firstName ? 1 : -1;
+        });
+        break;
+      case "middleName":
+        this.students.sort((first: Student, second: Student) => {
+          return first.middleName >= second.middleName ? 1 : -1;
+        });
+        break;
+      case "date":
+        this.students.sort((first: Student, second: Student) => {
+          return first.birthday >= second.birthday ? 1 : -1;
+        });
+        break;
+      case "mark":
+        this.students.sort((first: Student, second: Student) => {
+          return first.averageMark >= second.averageMark ? 1 : -1;
+        });
+        break;
+    }
+
+    //
+    // this.students.sort(function( a: Student, b: Student): number {
+    //   return (a[this.selected] < b[this.selected]) ? 1 : ((b[this.selected] < a[this.selected]) ? -1 : 0);
+    // });
+  }
 }
