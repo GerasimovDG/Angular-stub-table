@@ -10,6 +10,7 @@ import { DataHandlerService } from "../../service/data-handler.service";
 export class StudentsComponent implements OnInit {
 
   students: Student[];
+  tmpStudents: Student[];
   feature: boolean = true;
   search: string = "";
   searchField: string = "All";
@@ -20,6 +21,7 @@ export class StudentsComponent implements OnInit {
 
   ngOnInit(): void {
     this.students = this.dataHandler.getStudents();
+    this.tmpStudents = this.students;
   }
 
   toggleFeature(): void {
@@ -61,10 +63,9 @@ export class StudentsComponent implements OnInit {
 
   setStudentsByMark(mark: number): void {
     if (mark.toString() === "") {
-      this.students = this.dataHandler.getStudents();
+      this.students = this.tmpStudents;
     } else {
-      this.students = this.dataHandler.getStudents().filter(student => {
-        console.log(student.averageMark.toString() === mark.toString());
+      this.students = this.tmpStudents.filter(student => {
         return student.averageMark.toString() === mark.toString();
       });
     }
@@ -72,9 +73,9 @@ export class StudentsComponent implements OnInit {
   setStudentsByBirthday(birthday: string): void {
     const dateBirthday = new Date(birthday);
     if (birthday.toString() === "") {
-      this.students = this.dataHandler.getStudents();
+      this.students = this.tmpStudents;
     } else {
-      this.students = this.dataHandler.getStudents().filter(student => {
+      this.students = this.tmpStudents.filter(student => {
         return student.birthday.getTime() === dateBirthday.getTime();
       });
     }
@@ -118,5 +119,13 @@ export class StudentsComponent implements OnInit {
     // this.students.sort(function( a: Student, b: Student): number {
     //   return (a[this.selected] < b[this.selected]) ? 1 : ((b[this.selected] < a[this.selected]) ? -1 : 0);
     // });
+  }
+
+  deleteStudent(stud: Student): void {
+    const ans: boolean = confirm(`Вы точно хотите удалить студента: ${stud.lastName} ${stud.firstName} ${stud.middleName}?`);
+    if (ans === true) {
+      this.students = this.students.filter(student =>  student !== stud);
+      this.tmpStudents = this.students;
+    }
   }
 }

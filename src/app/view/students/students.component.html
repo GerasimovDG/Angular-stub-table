@@ -40,7 +40,7 @@
         <td>{{student.birthday | date:"dd.MM.yyyy"}}</td>
         <td>{{student.averageMark}}</td>
         <td>
-          <div class="delete">
+          <div class="delete" (click)="deleteStudent(student)">
             <button class="delete__button"></button>
 <!--            <label class="form-check-label">-->
 <!--              <input class="form-check-input"-->
