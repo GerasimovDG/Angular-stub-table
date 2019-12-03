@@ -7,10 +7,15 @@
     </label>
   </div>
   <div class="view-search">
-    <input class="view-search__input" type="text" placeholder="Поиск" [(ngModel)]="search">
+    <input class="input view-search__input " type="text" placeholder="Поиск" [(ngModel)]="search">
     <button class="view-search__button" (click)="searchField = 'lastName'">по фамилии</button>
     <button class="view-search__button" (click)="searchField = 'firstName'">по имени</button>
     <button class="view-search__button" (click)="searchField = 'All'">по имени и фамилии</button>
+  </div>
+  <div class="view-filter">
+    <div class="view-filter__name">Фильтр</div>
+    <input class="input view-filter__input" type="text" placeholder="По среднему баллу" [(ngModel)]="mark" (ngModelChange)="setStudentsByMark(mark)">
+    <input class="input view-filter__input" type="date" placeholder="По дате рождения" [(ngModel)]="birthday" (ngModelChange)="setStudentsByBirthday(birthday)">
   </div>
   <div class="view-body table-responsive">
     <table class="table table-hover">
@@ -27,12 +32,12 @@
       <tr [ngClass]="{
             'table-body_red' : student.averageMark < 3 && getFeature(),
             'table-body_green' : isSearch(student, searchField)
-          }"  *ngFor="let student of students; let i = index">
+          }"  *ngFor="let student of students; let i = index" >
         <td>{{i + 1}}</td>
         <td>{{student.lastName}}</td>
         <td>{{student.firstName}}</td>
         <td>{{student.middleName}}</td>
-        <td>{{student.birthday | date:"shortDate"}}</td>
+        <td>{{student.birthday | date:"dd.MM.yyyy"}}</td>
         <td>{{student.averageMark}}</td>
         <td>
           <div class="delete">

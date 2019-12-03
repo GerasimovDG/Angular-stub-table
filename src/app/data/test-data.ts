@@ -39,7 +39,7 @@ export class TestData {
       lastName: "Муханов",
       firstName: "Эммануил",
       middleName: "Юриевич",
-      birthday: new Date("1996-08-22"),
+      birthday: new Date("2000-08-12"),
       averageMark: 4.1
     },
     {
@@ -64,7 +64,7 @@ export class TestData {
       firstName: "Наталья",
       middleName: "Семеновна",
       birthday: new Date("2001-12-12"),
-      averageMark: 3.9
+      averageMark: 4.4
     },
     {
       id: 9,

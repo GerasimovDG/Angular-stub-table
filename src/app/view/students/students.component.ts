@@ -13,6 +13,8 @@ export class StudentsComponent implements OnInit {
   feature: boolean = true;
   search: string = "";
   searchField: string = "All";
+  mark: number;
+  birthday: string;
 
   constructor(private dataHandler: DataHandlerService) { }
 
@@ -55,5 +57,26 @@ export class StudentsComponent implements OnInit {
     //   return true;
     // }
     return false;
+  }
+
+  setStudentsByMark(mark: number): void {
+    if (mark.toString() === "") {
+      this.students = this.dataHandler.getStudents();
+    } else {
+      this.students = this.dataHandler.getStudents().filter(student => {
+        console.log(student.averageMark.toString() === mark.toString());
+        return student.averageMark.toString() === mark.toString();
+      });
+    }
+  }
+  setStudentsByBirthday(birthday: string): void {
+    const dateBirthday = new Date(birthday);
+    if (birthday.toString() === "") {
+      this.students = this.dataHandler.getStudents();
+    } else {
+      this.students = this.dataHandler.getStudents().filter(student => {
+        return student.birthday.getTime() === dateBirthday.getTime();
+      });
+    }
   }
 }
