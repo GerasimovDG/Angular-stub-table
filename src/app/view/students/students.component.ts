@@ -16,6 +16,7 @@ export class StudentsComponent implements OnInit {
   searchField: string = "All";
   mark: number;
   birthday: string;
+  sortUp: boolean = true;
 
   constructor(private dataHandler: DataHandlerService) { }
 
@@ -30,6 +31,10 @@ export class StudentsComponent implements OnInit {
 
   getFeature(): boolean {
     return this.feature;
+  }
+
+  trackByStudentID( student: Student): number {
+    return student.id;
   }
 
   isSearch(student: Student, searchField: string): boolean {
@@ -81,39 +86,83 @@ export class StudentsComponent implements OnInit {
     }
   }
 
-  sortTableBy(by: string): void {
-    switch (by) {
-      case "numb":
-        this.students.sort((first: Student, second: Student) => {
-          return first.id >= second.id ? 1 : -1;
-        });
-        break;
-      case "lastName":
-        this.students.sort((first: Student, second: Student) => {
-          return first.lastName >= second.lastName ? 1 : -1;
-        });
-        break;
-      case "firstName":
-        this.students.sort((first: Student, second: Student) => {
-          return first.firstName >= second.firstName ? 1 : -1;
-        });
-        break;
-      case "middleName":
-        this.students.sort((first: Student, second: Student) => {
-          return first.middleName >= second.middleName ? 1 : -1;
-        });
-        break;
-      case "date":
-        this.students.sort((first: Student, second: Student) => {
-          return first.birthday >= second.birthday ? 1 : -1;
-        });
-        break;
-      case "mark":
-        this.students.sort((first: Student, second: Student) => {
-          return first.averageMark >= second.averageMark ? 1 : -1;
-        });
-        break;
+  // sortByLastName(): void {
+  //   this.students.sort((first: Student, second: Student) => {
+  //     if (this.sortUp) {
+  //       return first.lastName >= second.lastName ? 1 : -1;;
+  //     }
+  //     return first.lastName <= second.lastName ? 1 : -1;
+  //   });
+  // }
+  // sortByFirstName(): void {
+  //   this.students.sort((first: Student, second: Student) => {
+  //     if (this.sortUp) {
+  //       return first.firstName >= second.firstName ? 1 : -1;;
+  //     }
+  //     return first.firstName <= second.firstName ? 1 : -1;
+  //   });
+  // }
+  // sortByMiddleName(): void {
+  //   this.students.sort((first: Student, second: Student) => {
+  //     if (this.sortUp) {
+  //       return first.middleName >= second.middleName ? 1 : -1;;
+  //     }
+  //     return first.middleName <= second.middleName ? 1 : -1;
+  //   });
+  // }
+  // sortByDate(): void {
+  //   this.students.sort((first: Student, second: Student) => {
+  //     if (this.sortUp) {
+  //       return first.birthday >= second.birthday ? 1 : -1;;
+  //     }
+  //     return first.birthday <= second.birthday ? 1 : -1;
+  //   });
+  // }
+  // sortByMark(): void {
+  //   this.students.sort((first: Student, second: Student) => {
+  //     if (this.sortUp) {
+  //       return first.averageMark >= second.averageMark ? 1 : -1;;
+  //     }
+  //     return first.averageMark <= second.averageMark ? 1 : -1;
+  //   });
+  // }
+
+  sortTableBy(sortBy: string): void {
+    if (sortBy === "id") {
+      this.students.sort((first: Student, second: Student) => {
+        return first.id >= second.id ? 1 : -1;
+      });
+    } else {
+      this.students.sort((first: Student, second: Student) => {
+        if (this.sortUp) {
+          return first[sortBy] >= second[sortBy] ? 1 : -1;
+        }
+        return first[sortBy] <= second[sortBy] ? 1 : -1;
+      });
     }
+
+    // switch (sortBy) {
+    //   case "index":
+    //     this.students.sort((first: Student, second: Student) => {
+    //       return first.id >= second.id ? 1 : -1;
+    //     });
+    //     break;
+    //   case "lastName":
+    //     this.sortByLastName();
+    //     break;
+    //   case "firstName":
+    //     this.sortByFirstName();
+    //     break;
+    //   case "middleName":
+    //     this.sortByMiddleName();
+    //     break;
+    //   case "date":
+    //     this.sortByDate();
+    //     break;
+    //   case "mark":
+    //     this.sortByMark();
+    //     break;
+    // }
 
     //
     // this.students.sort(function( a: Student, b: Student): number {

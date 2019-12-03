@@ -82,5 +82,13 @@ export class TestData {
       birthday: new Date("2001-03-17"),
       averageMark: 2.9
     },
+    {
+      id: 11,
+      lastName: "Петренко",
+      firstName: "Николай",
+      middleName: "Алексеевич",
+      birthday: new Date("2001-11-11"),
+      averageMark: 4.9
+    },
   ];
 }

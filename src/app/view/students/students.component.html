@@ -13,26 +13,26 @@
     <button class="view-search__button" (click)="searchField = 'All'">по имени и фамилии</button>
   </div>
   <div class="view-filter">
-    <div class="view-filter__name">Фильтр</div>
+    <div class="view-filter__name">Фильтр:</div>
     <input class="input view-filter__input" type="text" placeholder="По среднему баллу" [(ngModel)]="mark" (ngModelChange)="setStudentsByMark(mark)">
     <input class="input view-filter__input" type="date" placeholder="По дате рождения" [(ngModel)]="birthday" (ngModelChange)="setStudentsByBirthday(birthday)">
   </div>
   <div class="view-body table-responsive">
     <table class="table table-hover" >
       <thead class="table-header">
-      <th (click)="sortTableBy('numb')">#</th>
-      <th (click)="sortTableBy('lastName')">Фамилия</th>
-      <th (click)="sortTableBy('firstName')">Имя</th>
-      <th (click)="sortTableBy('middleName')">Отчество</th>
-      <th (click)="sortTableBy('date')">Дата рождения</th>
-      <th (click)="sortTableBy('mark')">Средний балл</th>
+      <th (click)="sortTableBy('id'); sortUp = !sortUp">#</th>
+      <th (click)="sortTableBy('lastName'); sortUp = !sortUp">Фамилия</th>
+      <th (click)="sortTableBy('firstName'); sortUp = !sortUp">Имя</th>
+      <th (click)="sortTableBy('middleName'); sortUp = !sortUp">Отчество</th>
+      <th (click)="sortTableBy('birthday'); sortUp = !sortUp">Дата рождения</th>
+      <th (click)="sortTableBy('averageMark'); sortUp = !sortUp">Средний балл</th>
       <th></th>
       </thead>
       <tbody class="table-body">
       <tr [ngClass]="{
             'table-body_red' : student.averageMark < 3 && getFeature(),
             'table-body_green' : isSearch(student, searchField)
-          }"  *ngFor="let student of students; let i = index" >
+          }"  *ngFor="let student of students; trackBy:trackByStudentID; let i = index">
         <td>{{i + 1}}</td>
         <td>{{student.lastName}}</td>
         <td>{{student.firstName}}</td>
@@ -42,18 +42,8 @@
         <td>
           <div class="delete" (click)="deleteStudent(student)">
             <button class="delete__button"></button>
-<!--            <label class="form-check-label">-->
-<!--              <input class="form-check-input"-->
-<!--                     type="checkbox"-->
-<!--                     value=""-->
-<!--              >-->
-<!--              <span class="form-check-sign">-->
-<!--              <span class="check"></span>-->
-<!--            </span>-->
-<!--            </label>-->
           </div>
         </td>
-
       </tr>
       </tbody>
     </table>
