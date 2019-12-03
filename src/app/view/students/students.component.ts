@@ -10,6 +10,7 @@ import { DataHandlerService } from "../../service/data-handler.service";
 export class StudentsComponent implements OnInit {
 
   students: Student[];
+  feature: boolean = true;
 
   constructor(private dataHandler: DataHandlerService) { }
 
@@ -17,4 +18,11 @@ export class StudentsComponent implements OnInit {
     this.students = this.dataHandler.getStudents();
   }
 
+  toggleFeature(): void {
+    this.feature = !this.feature;
+  }
+
+  getFeature(): boolean {
+    return this.feature;
+  }
 }
