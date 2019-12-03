@@ -59,10 +59,6 @@ export class StudentsComponent implements OnInit {
         }
         break;
     }
-    // if (student.lastName.toLocaleLowerCase().includes(this.search.toLowerCase()) ||
-    //   student.firstName.toLocaleLowerCase().includes(this.search.toLowerCase())) {
-    //   return true;
-    // }
     return false;
   }
 
@@ -86,47 +82,6 @@ export class StudentsComponent implements OnInit {
     }
   }
 
-  // sortByLastName(): void {
-  //   this.students.sort((first: Student, second: Student) => {
-  //     if (this.sortUp) {
-  //       return first.lastName >= second.lastName ? 1 : -1;;
-  //     }
-  //     return first.lastName <= second.lastName ? 1 : -1;
-  //   });
-  // }
-  // sortByFirstName(): void {
-  //   this.students.sort((first: Student, second: Student) => {
-  //     if (this.sortUp) {
-  //       return first.firstName >= second.firstName ? 1 : -1;;
-  //     }
-  //     return first.firstName <= second.firstName ? 1 : -1;
-  //   });
-  // }
-  // sortByMiddleName(): void {
-  //   this.students.sort((first: Student, second: Student) => {
-  //     if (this.sortUp) {
-  //       return first.middleName >= second.middleName ? 1 : -1;;
-  //     }
-  //     return first.middleName <= second.middleName ? 1 : -1;
-  //   });
-  // }
-  // sortByDate(): void {
-  //   this.students.sort((first: Student, second: Student) => {
-  //     if (this.sortUp) {
-  //       return first.birthday >= second.birthday ? 1 : -1;;
-  //     }
-  //     return first.birthday <= second.birthday ? 1 : -1;
-  //   });
-  // }
-  // sortByMark(): void {
-  //   this.students.sort((first: Student, second: Student) => {
-  //     if (this.sortUp) {
-  //       return first.averageMark >= second.averageMark ? 1 : -1;;
-  //     }
-  //     return first.averageMark <= second.averageMark ? 1 : -1;
-  //   });
-  // }
-
   sortTableBy(sortBy: string): void {
     if (sortBy === "id") {
       this.students.sort((first: Student, second: Student) => {
@@ -140,34 +95,6 @@ export class StudentsComponent implements OnInit {
         return first[sortBy] <= second[sortBy] ? 1 : -1;
       });
     }
-
-    // switch (sortBy) {
-    //   case "index":
-    //     this.students.sort((first: Student, second: Student) => {
-    //       return first.id >= second.id ? 1 : -1;
-    //     });
-    //     break;
-    //   case "lastName":
-    //     this.sortByLastName();
-    //     break;
-    //   case "firstName":
-    //     this.sortByFirstName();
-    //     break;
-    //   case "middleName":
-    //     this.sortByMiddleName();
-    //     break;
-    //   case "date":
-    //     this.sortByDate();
-    //     break;
-    //   case "mark":
-    //     this.sortByMark();
-    //     break;
-    // }
-
-    //
-    // this.students.sort(function( a: Student, b: Student): number {
-    //   return (a[this.selected] < b[this.selected]) ? 1 : ((b[this.selected] < a[this.selected]) ? -1 : 0);
-    // });
   }
 
   deleteStudent(stud: Student): void {
