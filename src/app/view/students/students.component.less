@@ -1,3 +1,8 @@
+@orange: #F56433;
+@light_orange: rgba(245, 100, 51, 0.58);
+@bground: #CDD1DA;
+@text-grey: #7f7365;
+
 .view {
   width: 100%;
   max-width: 1200px;
@@ -12,8 +17,8 @@
 
     //background-color: coral;
     padding: 12px 10px;
-    border-bottom: 2px solid #F56433;
-    color: #F56433;
+    border-bottom: 2px solid @orange;
+    color: @orange;
 
     &__title {
       position: relative;
@@ -65,7 +70,7 @@
         width: 50px;
         height: 26px;
         border-radius: 13px;
-        background: #CDD1DA;
+        background: @bground;
         box-shadow: inset 0 2px 3px rgba(0,0,0,.2);
         transition: .2s;
       }
@@ -96,7 +101,7 @@
         width: 50px;
         height: 26px;
         border-radius: 13px;
-        background: #CDD1DA;
+        background: @bground;
         box-shadow: inset 0 2px 3px rgba(0,0,0,.2);
         transition: .2s;
       }
@@ -126,10 +131,48 @@
   }
 
   &-search {
+    display: flex;
+    justify-content: center;
     text-align: center;
 
     &__input {
-      margin: 5px auto;
+      border: 0;
+      margin: 10px 0;
+      padding: 5px;
+      width: 40%;
+      border: 2px solid rgba(149, 66, 31, 0.43);
+      border-radius: 15px 0 0 15px;
+      outline: none;
+      transition: .2s ease-in-out;
+
+      &:focus,
+      &:hover {
+        border-color: @orange;
+      }
+    }
+    &__button {
+      //width: 30%;
+      margin: 10px 0;
+      padding: 5px;
+      text-decoration: none;
+      outline: none;
+      background-color: #E1E3E0;
+      color: @text-grey;
+      font-weight: bold;
+      //border-bottom: 2px solid rgba(149, 66, 31, 0.43);
+      //border-right: 2px solid rgba(149, 66, 31, 0.43);
+      border: 2px solid rgba(149, 66, 31, 0.43);
+      border-left: 0;
+      cursor: pointer;
+      transition: .2s ease-out;
+
+      &:last-of-type {
+        border-radius: 0 15px 15px 0;
+      }
+      &:hover {
+        //background-color: @light_orange;
+        box-shadow:0px -25px 0 @light_orange inset;
+      }
     }
   }
 
@@ -149,8 +192,8 @@
     border-collapse: collapse;
 
     &-header {
-      border-bottom: 2px solid #F56433;
-      color: #F56433;
+      border-bottom: 2px solid @orange;
+      color: @orange;
     }
     &-body {
       text-align: center;
@@ -168,6 +211,12 @@
          td {
            color: #E1E3E0;;
          }
+      }
+      &_green {
+        background-color: rgba(48, 153, 44, 0.76);
+        td {
+          color: #E1E3E0;;
+        }
       }
     }
 

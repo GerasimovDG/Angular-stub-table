@@ -7,7 +7,10 @@
     </label>
   </div>
   <div class="view-search">
-    <input class="view-search__input" type="text" placeholder="Фамилия">
+    <input class="view-search__input" type="text" placeholder="Поиск" [(ngModel)]="search">
+    <button class="view-search__button" (click)="searchField = 'lastName'">по фамилии</button>
+    <button class="view-search__button" (click)="searchField = 'firstName'">по имени</button>
+    <button class="view-search__button" (click)="searchField = 'All'">по имени и фамилии</button>
   </div>
   <div class="view-body table-responsive">
     <table class="table table-hover">
@@ -21,7 +24,10 @@
       <th></th>
       </thead>
       <tbody class="table-body">
-      <tr [class.table-body_red]="student.averageMark < 3 && getFeature()" *ngFor="let student of students; let i = index">
+      <tr [ngClass]="{
+            'table-body_red' : student.averageMark < 3 && getFeature(),
+            'table-body_green' : isSearch(student, searchField)
+          }"  *ngFor="let student of students; let i = index">
         <td>{{i + 1}}</td>
         <td>{{student.lastName}}</td>
         <td>{{student.firstName}}</td>
