@@ -8,14 +8,14 @@
   </div>
   <div class="view-search">
     <input class="input view-search__input " type="text" placeholder="Поиск" [(ngModel)]="search">
-    <button class="view-search__button" (click)="searchField = 'lastName'">по фамилии</button>
-    <button class="view-search__button" (click)="searchField = 'firstName'">по имени</button>
-    <button class="view-search__button" (click)="searchField = 'All'">по имени и фамилии</button>
+    <button class="view-search__button" (click)="searchField = this.searchOption.LastName">по фамилии</button>
+    <button class="view-search__button" (click)="searchField = this.searchOption.FirstName">по имени</button>
+    <button class="view-search__button" (click)="searchField = this.searchOption.All">по имени и фамилии</button>
   </div>
   <div class="view-filter">
     <div class="view-filter__name">Фильтр:</div>
-    <input class="input view-filter__input" type="text" placeholder="По среднему баллу" [(ngModel)]="mark" (ngModelChange)="setStudentsByMark(mark)">
-    <input class="input view-filter__input" type="date" placeholder="По дате рождения" [(ngModel)]="birthday" (ngModelChange)="setStudentsByBirthday(birthday)">
+    <input class="input view-filter__input" type="text" placeholder="По среднему баллу" [(ngModel)]="mark" (ngModelChange)="setStudentsByMark()">
+    <input class="input view-filter__input" type="date" placeholder="По дате рождения" [(ngModel)]="birthday" (ngModelChange)="setStudentsByBirthday()">
   </div>
   <div class="view-body table-responsive">
     <table class="table table-hover" >
@@ -31,7 +31,7 @@
       <tbody class="table-body">
       <tr [ngClass]="{
             'table-body_red' : student.averageMark < 3 && getFeature(),
-            'table-body_green' : isSearch(student, searchField)
+            'table-body_green' : isSearch(student)
           }"  *ngFor="let student of students; trackBy:trackByStudentID; let i = index">
         <td>{{i + 1}}</td>
         <td>{{student.lastName}}</td>

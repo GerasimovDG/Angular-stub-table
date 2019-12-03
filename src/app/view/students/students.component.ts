@@ -2,20 +2,30 @@ import { Component, OnInit } from "@angular/core";
 import { Student } from "../../model/students";
 import { DataHandlerService } from "../../service/data-handler.service";
 
+
+enum SearchOption {
+  All,
+  LastName,
+  FirstName,
+}
 @Component({
   selector: "app-students",
   templateUrl: "./students.component.html",
   styleUrls: ["./students.component.less"]
 })
+
 export class StudentsComponent implements OnInit {
 
   students: Student[];
   tmpStudents: Student[];
   feature: boolean = true;
   search: string = "";
-  searchField: string = "All";
+
+  searchOption = SearchOption;
+  searchField = this.searchOption.All;
+
   mark: number;
-  birthday: string;
+  birthday: Date;
   sortUp: boolean = true;
 
   constructor(private dataHandler: DataHandlerService) { }
@@ -37,23 +47,23 @@ export class StudentsComponent implements OnInit {
     return student.id;
   }
 
-  isSearch(student: Student, searchField: string): boolean {
+  isSearch(student: Student): boolean {
     if (!this.search.trim()) {
       return false;
     }
-    switch (searchField) {
-      case "All":
+    switch (this.searchField) {
+      case SearchOption.All:
         if (student.lastName.toLocaleLowerCase().includes(this.search.toLowerCase()) ||
         student.firstName.toLocaleLowerCase().includes(this.search.toLowerCase())) {
           return true;
         }
         break;
-      case "lastName":
+      case SearchOption.LastName:
         if (student.lastName.toLocaleLowerCase().includes(this.search.toLowerCase())) {
           return true;
         }
         break;
-      case "firstName":
+      case SearchOption.FirstName:
         if (student.firstName.toLocaleLowerCase().includes(this.search.toLowerCase())) {
           return true;
         }
@@ -62,18 +72,18 @@ export class StudentsComponent implements OnInit {
     return false;
   }
 
-  setStudentsByMark(mark: number): void {
-    if (mark.toString() === "") {
+  setStudentsByMark(): void {
+    if (this.mark.toString() === "") {
       this.students = this.tmpStudents;
     } else {
       this.students = this.tmpStudents.filter(student => {
-        return student.averageMark.toString() === mark.toString();
+        return student.averageMark.toString() === this.mark.toString();
       });
     }
   }
-  setStudentsByBirthday(birthday: string): void {
-    const dateBirthday = new Date(birthday);
-    if (birthday.toString() === "") {
+  setStudentsByBirthday(): void {
+    const dateBirthday = new Date(this.birthday);
+    if (!this.birthday) {
       this.students = this.tmpStudents;
     } else {
       this.students = this.tmpStudents.filter(student => {
