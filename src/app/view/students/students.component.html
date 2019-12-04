@@ -8,9 +8,15 @@
   </div>
   <div class="view-search">
     <input class="input view-search__input " type="text" placeholder="Поиск" [(ngModel)]="search">
-    <button class="view-search__button" (click)="searchField = this.searchOption.LastName">по фамилии</button>
-    <button class="view-search__button" (click)="searchField = this.searchOption.FirstName">по имени</button>
-    <button class="view-search__button" (click)="searchField = this.searchOption.All">по имени и фамилии</button>
+    <button class="view-search__button"
+            [ngClass]="{ 'view-search__button_active' : searchField == this.searchOption.LastName}"
+            (click)="searchField = this.searchOption.LastName">по фамилии</button>
+    <button class="view-search__button"
+            [ngClass]="{ 'view-search__button_active' : searchField == this.searchOption.FirstName}"
+            (click)="searchField = this.searchOption.FirstName">по имени</button>
+    <button class="view-search__button "
+            [ngClass]="{ 'view-search__button_active' : searchField == this.searchOption.All}"
+            (click)="searchField = this.searchOption.All">по имени и фамилии</button>
   </div>
   <div class="view-filter">
     <div class="view-filter__name">Фильтр:</div>
@@ -40,7 +46,7 @@
         <td>{{student.birthday | date:"dd.MM.yyyy"}}</td>
         <td>{{student.averageMark}}</td>
         <td>
-          <div class="delete" (click)="deleteStudent(student)">
+          <div class="delete" (click)="hidden=true; delStudent=student" >
             <button class="delete__button"></button>
           </div>
         </td>
@@ -49,3 +55,13 @@
     </table>
   </div>
 </div>
+<div class="hidden" [ngClass]="{'hidden_active' : hidden}">
+  <div id="confirm" class="confirm">
+    <h2>Вы уверены, что хотите удалить студента?</h2>
+    <h3>{{delStudent.lastName || ""}} {{delStudent.firstName || ""}} {{delStudent.middleName || ""}}</h3>
+    <button class="confirm__button" (click)="deleteStudent(delStudent); hidden = false">Удалить</button>
+    <button class="confirm__button" (click)="hidden = false">Отмена</button>
+  </div>
+</div>
+
+

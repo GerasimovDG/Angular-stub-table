@@ -16,8 +16,8 @@ enum SearchOption {
 
 export class StudentsComponent implements OnInit {
 
-  students: Student[];
-  tmpStudents: Student[];
+  students: Student[] = this.dataHandler.getStudents();
+  tmpStudents: Student[] = this.students;
   feature: boolean = true;
   search: string = "";
 
@@ -28,6 +28,8 @@ export class StudentsComponent implements OnInit {
   birthday: Date;
   sortUp: boolean = true;
 
+  delStudent: Student = new Student();
+  hidden: boolean = false;
   constructor(private dataHandler: DataHandlerService) { }
 
   ngOnInit(): void {
@@ -73,7 +75,7 @@ export class StudentsComponent implements OnInit {
   }
 
   setStudentsByMark(): void {
-    if (this.mark.toString() === "") {
+    if (!this.mark) {
       this.students = this.tmpStudents;
     } else {
       this.students = this.tmpStudents.filter(student => {
@@ -82,10 +84,10 @@ export class StudentsComponent implements OnInit {
     }
   }
   setStudentsByBirthday(): void {
-    const dateBirthday = new Date(this.birthday);
     if (!this.birthday) {
       this.students = this.tmpStudents;
     } else {
+      const dateBirthday = new Date(this.birthday);
       this.students = this.tmpStudents.filter(student => {
         return student.birthday.getTime() === dateBirthday.getTime();
       });
@@ -108,10 +110,12 @@ export class StudentsComponent implements OnInit {
   }
 
   deleteStudent(stud: Student): void {
-    const ans: boolean = confirm(`Вы точно хотите удалить студента: ${stud.lastName} ${stud.firstName} ${stud.middleName}?`);
-    if (ans === true) {
-      this.students = this.students.filter(student =>  student !== stud);
+    // const ans: boolean = confirm(`Вы точно хотите удалить студента: ${stud.lastName} ${stud.firstName} ${stud.middleName}?`);
+    // if (ans === true) {
+    if (stud) {
+      this.students = this.students.filter(student => student !== stud);
       this.tmpStudents = this.students;
     }
+    // }
   }
 }
