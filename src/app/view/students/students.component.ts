@@ -34,7 +34,7 @@ export class StudentsComponent implements OnInit {
 
   ngOnInit(): void {
     this.students = this.dataHandler.getStudents();
-    this.tmpStudents = this.students;
+    // this.tmpStudents = this.students;
   }
 
   toggleFeature(): void {
@@ -76,19 +76,23 @@ export class StudentsComponent implements OnInit {
 
   setStudentsByMark(): void {
     if (!this.mark) {
-      this.students = this.tmpStudents;
+      // this.students = this.tmpStudents;
+      this.students = this.dataHandler.getStudents();
     } else {
-      this.students = this.tmpStudents.filter(student => {
+      this.students = this.dataHandler.getStudents().filter( student => {
+      // this.students = this.tmpStudents.filter(student => {
         return student.averageMark.toString() === this.mark.toString();
       });
     }
   }
   setStudentsByBirthday(): void {
     if (!this.birthday) {
-      this.students = this.tmpStudents;
+      // this.students = this.tmpStudents;
+      this.students = this.dataHandler.getStudents();
     } else {
       const dateBirthday = new Date(this.birthday);
-      this.students = this.tmpStudents.filter(student => {
+      this.students = this.dataHandler.getStudents().filter( student => {
+      // this.students = this.tmpStudents.filter(student => {
         return student.birthday.getTime() === dateBirthday.getTime();
       });
     }
@@ -113,9 +117,17 @@ export class StudentsComponent implements OnInit {
     // const ans: boolean = confirm(`Вы точно хотите удалить студента: ${stud.lastName} ${stud.firstName} ${stud.middleName}?`);
     // if (ans === true) {
     if (stud) {
-      this.students = this.students.filter(student => student !== stud);
-      this.tmpStudents = this.students;
+      this.dataHandler.deleteStudent(stud);
+      this.students = this.dataHandler.getStudents();
+      // this.students = this.students.filter(student => student !== stud);
+      // this.tmpStudents = this.students;
     }
     // }
   }
+
+  // setStudent(): void {
+  //   const student: Student = {id: 12, lastName: "A", firstName: "B", middleName: "C", averageMark: 5, birthday: new Date("2000-04-04")};
+  //   this.dataHandler.setStudent(student);
+  //   console.dir(student);
+  // }
 }

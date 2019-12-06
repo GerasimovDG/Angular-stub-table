@@ -1,0 +1,64 @@
+<div *ngIf="this.dataHandler.isCallFormService" class="bground">
+  <div class="container">
+    <form novalidate class="form" [formGroup]="form" (ngSubmit)="submitStudent()">
+      <div (click)="this.dataHandler.isCallFormService=false" class="close">&times;</div>
+      <h1>Добавление студента</h1>
+
+      <div class="form" formGroupName="fio">
+        <div class="form-control">
+          <label>Фамилия</label>
+          <input type="text" placeholder="Иванов" formControlName="lastName">
+          <div class="validation"
+               *ngIf="form.get('fio').get('lastName').invalid && form.get('fio').get('lastName').touched"
+          >
+            <small *ngIf="form.get('fio').get('lastName').errors.required">Поле не должно быть пустым</small>
+          </div>
+        </div>
+        <div class="form-control">
+          <label>Имя</label>
+          <input type="text" placeholder="Иван" formControlName="firstName">
+          <div class="validation"
+               *ngIf="form.get('fio').get('firstName').invalid && form.get('fio').get('firstName').touched"
+          >
+            <small *ngIf="form.get('fio').get('firstName').errors.required">Поле не должно быть пустым</small>
+          </div>
+        </div>
+        <div class="form-control">
+          <label>Отчество</label>
+          <input type="text" placeholder="Иванович" formControlName="middleName">
+          <div class="validation"
+               *ngIf="form.get('fio').get('middleName').invalid && form.get('fio').get('middleName').touched"
+          >
+            <small *ngIf="form.get('fio').get('middleName').errors.required">Поле не должно быть пустым</small>
+          </div>
+        </div>
+        <div class="validation">
+          <small *ngIf="form.get('fio').errors && form.get('fio').errors.restrictedFio">Имя не должно совпадать с фамилией или отчеством </small>
+        </div>
+      </div>
+      <div class="form-control">
+        <label>Дата рождения</label>
+        <input type="date" formControlName="birthday">
+        <div class="validation">
+          <small *ngIf="form.get('birthday').errors && form.get('birthday').errors.restrictedDate">Человеку должно быть меньше 10 лет</small>
+        </div>
+      </div>
+      <div class="form-control">
+        <label>Средняя оценка</label>
+        <input type="text" placeholder="4.4" formControlName="mark">
+        <div class="validation" *ngIf="form.get('mark').invalid && form.get('mark').touched">
+          <small
+            *ngIf="form.get('mark').errors.required"
+          >Поле не может быть пустым</small>
+          <small
+            *ngIf="form.get('mark').errors.min"
+          >Оценка должна быть больше {{form.get('mark').errors.min.min }} </small>
+          <small
+            *ngIf=" form.get('mark').errors.max"
+          >Оценка должна быть меньше {{form.get('mark').errors.max.max}} </small>
+        </div>
+      </div>
+      <button class="form-button" type="submit" [disabled]="form.invalid">Добавить</button>
+    </form>
+  </div>
+</div>

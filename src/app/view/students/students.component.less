@@ -26,7 +26,6 @@
       text-decoration: none;
       text-transform: uppercase;
 
-      font-family: sans-serif;
       font-weight: bold;
       font-size: 1.3rem;
     }
@@ -138,7 +137,14 @@
     }
   }
 
+  &-block {
+    display: flex;
+
+  }
   &-filter {
+    flex-basis: 50%;
+    //display: flex;
+   // width: 40%;
     margin-left: 20px;
     left: 20px;
     &__name {
@@ -149,11 +155,41 @@
     &__input {
       padding: 5px;
       height: 20px;
-      width: 15%;
+      //width: 15%;
       border-radius: 15px;
       color: @text-grey;
 
       margin-right: 5px;
+    }
+  }
+
+  &-button {
+    flex-basis: 50%;
+    align-self: flex-end;
+    position: relative;
+    &__button {
+      position: absolute;
+      bottom: 0;
+      right: 10px;
+
+      outline: none;
+      cursor: pointer;
+
+      border-radius: 15px;
+      border: 1px solid #fff;
+      background-color: rgba(245, 100, 51, 0.89);
+      color: #fff;
+
+      margin: 10px;
+      padding: .5rem 1.5rem;
+      font-weight: bold;
+
+      transition: .2s ease-out;
+
+      &:hover {
+        background-color: rgba(245, 100, 51, 1);
+        border: 1px solid @orange;
+      }
     }
   }
 
@@ -312,24 +348,32 @@
   }
 
   &__button {
-    position: relative;
-    margin: 5px;
-    font-size: 0.9rem;
 
-    width: 40%;
-    height: 20%;
-    text-decoration: none;
     outline: none;
-    background-color: #E1E3E0;
-    color: @text-grey;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    background-color: @orange;
+    color: #fff;
+
+    margin: 1.5rem;
+    padding: .5rem 1.5rem;
     font-weight: bold;
-    border: 2px solid rgba(149, 66, 31, 0.43);
-    cursor: pointer;
+
     transition: .2s ease-out;
 
     &:hover {
-      color: #fff;
-      background-color: @orange;
+      background-color: rgba(245, 100, 51, 0.89);
+      // color: @orange;
+      border: 1px solid @orange;
+    }
+
+    &_cancel {
+      background-color: #9a9a9a;
+
+      &:hover {
+        background-color: #adadad;
+        border: 1px solid #9a9a9a;
+      }
     }
   }
 }
