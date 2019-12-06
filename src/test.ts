@@ -8,6 +8,7 @@ import {
 
 import ("zone.js/dist/zone-testing");
 
+// tslint:disable-next-line:no-any
 declare const require: any;
 
 // First, initialize the Angular testing environment.

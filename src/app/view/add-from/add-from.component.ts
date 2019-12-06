@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { AbstractControl, FormControl, FormGroup, Validators } from "@angular/forms";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Student } from "../../model/students";
 import { DataHandlerService } from "../../service/data-handler.service";
 import { MyValidators } from "../my.validators";
@@ -13,7 +13,6 @@ export class AddFromComponent implements OnInit {
 
   form: FormGroup;
 
-
   constructor(private dataHandler: DataHandlerService) {}
 
   ngOnInit(): void {
@@ -24,7 +23,7 @@ export class AddFromComponent implements OnInit {
         middleName: new FormControl("", [Validators.required])
       }, [Validators.required, MyValidators.restrictedFIO ]),
       birthday: new FormControl("", [Validators.required, MyValidators.restrictedDate]),
-      mark: new FormControl("", [Validators.required, Validators.max(5), Validators.min(0)])
+      mark: new FormControl("", [Validators.required, Validators.max(5), Validators.min(0)]),
     });
 
   }
@@ -32,7 +31,6 @@ export class AddFromComponent implements OnInit {
   submitStudent(): void {
     if (this.form.valid) {
       const data = {...this.form.value};
-      console.dir(data);
 
       const newStudent: Student = new Student(
         this.dataHandler.getLastID() + 1,
@@ -42,7 +40,6 @@ export class AddFromComponent implements OnInit {
         new Date(data.birthday),
         data.mark,
       );
-      console.dir(this.dataHandler.getLastID());
       this.dataHandler.addStudent(newStudent);
       this.form.reset();
     }

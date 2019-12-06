@@ -77,8 +77,10 @@
     outline: none;
     border: 1px solid #fff;
     border-radius: 5px;
-    background-color: @orange;
     color: #fff;
+
+    background-color: rgba(122, 48, 23, 0.5);
+    cursor: no-drop;
 
     margin-top: 1.5rem;
     padding: .5rem 1rem;
@@ -86,14 +88,10 @@
 
     transition: .2s ease-out;
 
-    &:hover:enabled {
-      background-color: rgba(245, 100, 51, 0.89);
-      // color: @orange;
-      border: 1px solid @orange;
-    }
-    &:disabled {
-      background-color: rgba(122, 48, 23, 0.5);
-      cursor: no-drop;
+    &_enabled,
+    &_enabled:hover{
+      background-color: @orange;
+      cursor: pointer;
     }
   }
 

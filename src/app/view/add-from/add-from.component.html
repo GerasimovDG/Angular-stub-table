@@ -49,7 +49,7 @@
         <div class="validation" *ngIf="form.get('mark').invalid && form.get('mark').touched">
           <small
             *ngIf="form.get('mark').errors.required"
-          >Поле не может быть пустым</small>
+          >Введите оценку от 0 до 5</small>
           <small
             *ngIf="form.get('mark').errors.min"
           >Оценка должна быть больше {{form.get('mark').errors.min.min }} </small>
@@ -58,7 +58,7 @@
           >Оценка должна быть меньше {{form.get('mark').errors.max.max}} </small>
         </div>
       </div>
-      <button class="form-button" type="submit" [disabled]="form.invalid">Добавить</button>
+      <button class="form-button" [ngClass]="{'form-button_enabled' : form.valid}" type="submit">Добавить</button>
     </form>
   </div>
 </div>
