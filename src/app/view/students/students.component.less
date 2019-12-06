@@ -277,6 +277,7 @@
           border-radius: 50%;
 
           cursor: pointer;
+          transition: .2s linear;
 
           &:after,
           &:before {
@@ -295,6 +296,42 @@
           }
           &:active ~ .hidden {
             display: block;
+          }
+          &:hover {
+            background-color: #555;
+          }
+          &:hover:after {
+            background-color: #ff5862;
+          }
+          &:hover:before {
+            background-color: #ff5862;
+          }
+        }
+      }
+
+      .edit {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        &__button {
+          outline: none;
+          width: 1rem;
+          height: 1rem;
+          background-color: @bground;
+          border-radius: 50%;
+          cursor: pointer;
+        }
+
+        i {
+          outline: none;
+          opacity: .5;
+          cursor: pointer;
+
+          transition: .2s linear;
+
+          &:hover {
+            opacity: 1;
           }
         }
       }

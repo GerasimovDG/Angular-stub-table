@@ -37,6 +37,7 @@
       <th (click)="sortTableBy('birthday'); sortUp = !sortUp">Дата рождения</th>
       <th (click)="sortTableBy('averageMark'); sortUp = !sortUp">Средний балл</th>
       <th></th>
+      <th></th>
       </thead>
       <tbody class="table-body">
       <tr [ngClass]="{
@@ -49,6 +50,11 @@
         <td>{{student.middleName}}</td>
         <td>{{student.birthday | date:"dd.MM.yyyy"}}</td>
         <td>{{student.averageMark}}</td>
+        <td>
+          <div class="edit" (click)="this.dataHandler.setEditStudent(student)" >
+            <i class="fas fa-edit"></i>
+          </div>
+        </td>
         <td>
           <div class="delete" (click)="hidden=true; delStudent=student" >
             <button class="delete__button"></button>
