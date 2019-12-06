@@ -6,7 +6,7 @@
       <h2>{{ this.dataHandler.student.lastName }}
         {{ this.dataHandler.student.firstName }}
         {{ this.dataHandler.student.middleName }}</h2>
-      <button class="form-button form-button_enabled" (click)="setEditStudent(this.editStudent)">Заполнить</button>
+      <button type="button" class="form-button form-button_enabled" (click)="setEditStudent(this.dataHandler.student)">Заполнить</button>
       <div class="form" formGroupName="fio">
         <div class="form-control">
           <label>Фамилия</label>

@@ -13,7 +13,6 @@ import { MyValidators } from "../my.validators";
 export class DeleteFormComponent implements OnInit {
 
   delForm: FormGroup;
-  editStudent: Student = this.dataHandler.getStudents()[0];
 
   constructor(private dataHandler: DataHandlerService) {
   }
@@ -47,9 +46,9 @@ export class DeleteFormComponent implements OnInit {
   }
 
   setEditStudent(student: Student): void {
-    this.delForm.patchValue({fio: this.dataHandler.student});
-    this.delForm.patchValue({birthday: this.formatDate(this.dataHandler.student.birthday)  });
-    this.delForm.patchValue({mark: this.dataHandler.student.averageMark});
+    this.delForm.patchValue({fio: student});
+    this.delForm.patchValue({birthday: this.formatDate(student.birthday)  });
+    this.delForm.patchValue({mark: student.averageMark});
   }
 
   submitEditStudent(): void {
@@ -65,6 +64,9 @@ export class DeleteFormComponent implements OnInit {
         data.mark,
       );
       this.dataHandler.editStudent(newStudent);
+      this.dataHandler.isCallDelFormService = false;
+      this.dataHandler.student = newStudent;
+      this.delForm.reset();
     }
   }
 
