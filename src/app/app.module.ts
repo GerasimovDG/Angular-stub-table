@@ -4,7 +4,7 @@ import { BrowserModule } from "@angular/platform-browser";
 
 import { AppComponent } from "./app.component";
 import { AddFromComponent } from "./view/add-from/add-from.component";
-import { DeleteFormComponent } from "./view/delete-form/delete-form.component";
+import { EditFormComponent } from "./view/edit-form/edit-form.component";
 import { StudentsComponent } from "./view/students/students.component";
 
 @NgModule({
@@ -12,7 +12,7 @@ import { StudentsComponent } from "./view/students/students.component";
     AppComponent,
     StudentsComponent,
     AddFromComponent,
-    DeleteFormComponent,
+    EditFormComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,3 @@
-import { formatDate } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Student } from "../../model/students";
@@ -6,11 +5,11 @@ import { DataHandlerService } from "../../service/data-handler.service";
 import { MyValidators } from "../my.validators";
 
 @Component({
-  selector: "app-delete-form",
-  templateUrl: "./delete-form.component.html",
-  styleUrls: ["./delete-form.component.less"]
+  selector: "app-edit-form",
+  templateUrl: "./edit-form.component.html",
+  styleUrls: ["./edit-form.component.less"]
 })
-export class DeleteFormComponent implements OnInit {
+export class EditFormComponent implements OnInit {
 
   delForm: FormGroup;
 
@@ -68,8 +67,5 @@ export class DeleteFormComponent implements OnInit {
       this.delForm.reset();
     }
   }
-
-
-
 
 }
