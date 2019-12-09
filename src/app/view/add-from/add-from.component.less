@@ -1,4 +1,3 @@
-@import (css) url("https://fonts.googleapis.com/css?family=Roboto:300,300i,700,700i&display=swap&subset=cyrillic");
 
 @orange: #F56433;
 @light_orange: rgba(245, 100, 51, 0.58);
@@ -14,6 +13,17 @@
   width: 100%;
   height: 100vh;
   background: rgba(0,0,0,0.5);
+
+  animation: bgroundIn .2s;
+
+  @keyframes bgroundIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 }
 .container {
   position: absolute;
@@ -23,6 +33,20 @@
   bottom: 0;
   max-width: 500px;
   margin: 0 auto;
+
+  animation: containerIn .2s;
+
+  @keyframes containerIn {
+    from {
+      opacity: 0;
+      transform: translateY(-100px);
+
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 
 }
 

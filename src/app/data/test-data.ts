@@ -8,7 +8,7 @@ export class TestData {
       lastName: "Герасимов",
       firstName: "Дмитрий",
       middleName: "Геннадьевич",
-      birthday: new Date("1998-04-24"),
+      birthday: new Date("2010-04-24"),
       averageMark: 4.4
     },
     {
@@ -16,7 +16,7 @@ export class TestData {
       lastName: "Курпатов ",
       firstName: "Данила",
       middleName: "Трофимович",
-      birthday: new Date("1997-03-12"),
+      birthday: new Date("2011-03-12"),
       averageMark: 3.4
     },
     {
@@ -24,7 +24,7 @@ export class TestData {
       lastName: "Дубровин",
       firstName: "Сергей",
       middleName: "Ильич",
-      birthday: new Date("2000-08-12"),
+      birthday: new Date("2010-08-12"),
       averageMark: 4
     },
     {
@@ -32,7 +32,7 @@ export class TestData {
       lastName: "Деменкова",
       firstName: "Ева",
       middleName: "Чеславовна",
-      birthday: new Date("2001-07-07"),
+      birthday: new Date("2014-07-07"),
       averageMark: 4.5
     },
     {
@@ -40,7 +40,7 @@ export class TestData {
       lastName: "Муханов",
       firstName: "Эммануил",
       middleName: "Юриевич",
-      birthday: new Date("2000-08-12"),
+      birthday: new Date("2010-08-12"),
       averageMark: 4.1
     },
     {
@@ -48,7 +48,7 @@ export class TestData {
       lastName: "Каратеева",
       firstName: "Инна",
       middleName: "Семеновна",
-      birthday: new Date("1999-09-02"),
+      birthday: new Date("2011-09-02"),
       averageMark: 4.1
     },
     {
@@ -56,7 +56,7 @@ export class TestData {
       lastName: "Ефимов",
       firstName: "Рюрик",
       middleName: "Яковлевич",
-      birthday: new Date("1999-08-29"),
+      birthday: new Date("2011-08-29"),
       averageMark: 2.4
     },
     {
@@ -64,7 +64,7 @@ export class TestData {
       lastName: "Бирюкова",
       firstName: "Наталья",
       middleName: "Семеновна",
-      birthday: new Date("2001-12-12"),
+      birthday: new Date("2012-12-12"),
       averageMark: 4.4
     },
     {
@@ -72,7 +72,7 @@ export class TestData {
       lastName: "Самсонова",
       firstName: "Александра",
       middleName: "Павловна",
-      birthday: new Date("2000-10-11"),
+      birthday: new Date("2010-10-11"),
       averageMark: 4.2
     },
     {
@@ -80,7 +80,7 @@ export class TestData {
       lastName: "Юсупова",
       firstName: "Нина",
       middleName: "Федоровна",
-      birthday: new Date("2001-03-17"),
+      birthday: new Date("2011-03-17"),
       averageMark: 2.9
     },
     {
@@ -88,7 +88,7 @@ export class TestData {
       lastName: "Петренко",
       firstName: "Николай",
       middleName: "Алексеевич",
-      birthday: new Date("2001-11-11"),
+      birthday: new Date("2011-11-11"),
       averageMark: 4.9
     },
   ];

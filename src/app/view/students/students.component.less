@@ -349,9 +349,29 @@
   background: rgba(0,0,0,0.5);
   display: none;
 
+  animation: hiddenOut .2s;
+  @keyframes hiddenOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
   &_active {
-    transition-delay: 1s;
     display: block;
+
+    animation: hiddenIn .2s;
+
+    @keyframes hiddenIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
   }
 }
 
@@ -373,7 +393,7 @@
   max-height: 20%;
   margin: auto;
 
-  font-family: sans-serif;
+  font-family: 'Roboto', sans-serif;
   text-decoration: none;
   font-size: 0.9rem;
 

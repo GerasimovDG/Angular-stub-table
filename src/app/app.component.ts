@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { DataHandlerService } from "./service/data-handler.service";
 
 @Component({
   selector: "app-root",
@@ -8,4 +9,5 @@ import { Component } from "@angular/core";
 export class AppComponent {
   title = "stud-table";
 
+  constructor(private dataHandler: DataHandlerService) {}
 }

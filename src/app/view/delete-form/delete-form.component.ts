@@ -14,8 +14,7 @@ export class DeleteFormComponent implements OnInit {
 
   delForm: FormGroup;
 
-  constructor(private dataHandler: DataHandlerService) {
-  }
+  constructor(private dataHandler: DataHandlerService) {}
 
   ngOnInit(): void {
     this.delForm = new FormGroup( {
@@ -27,7 +26,7 @@ export class DeleteFormComponent implements OnInit {
       birthday: new FormControl("", [Validators.required, MyValidators.restrictedDate]),
       mark: new FormControl("", [Validators.required, Validators.max(5), Validators.min(0)]),
     });
-
+    this.setEditStudent(this.dataHandler.student);
   }
 
 

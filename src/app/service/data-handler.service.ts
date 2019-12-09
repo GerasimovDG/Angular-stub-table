@@ -10,7 +10,7 @@ export class DataHandlerService {
 
   // флаг, отвечающий за открытие формы добавления студента
   isCallFormService: boolean = false;
-  // флаг, отвечающий за открытие формы удаления студента
+  // флаг, отвечающий за открытие формы редактирования студента
   isCallDelFormService: boolean = false;
   student: Student;
 
