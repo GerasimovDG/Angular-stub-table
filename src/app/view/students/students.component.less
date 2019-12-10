@@ -210,6 +210,22 @@
         color: @orange;
 
         cursor: pointer;
+
+        .active {
+          border-radius: 5px 5px 0 0;
+          background-color: rgba(0,0,0,0.1);
+
+          animation: activeIn .3s;
+
+          @keyframes activeIn {
+            from {
+              background-color: rgba(0,0,0,0);
+            }
+            to {
+              background-color: rgba(0,0,0,0.1);
+            }
+          }
+        }
       }
 
       &-body {

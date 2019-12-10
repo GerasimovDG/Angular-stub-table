@@ -26,6 +26,7 @@ export class StudentsComponent implements OnInit {
   mark: number;
   birthday: Date;
   sortUp: boolean = true;
+  sort: string;
 
   delStudent: Student = new Student();
   hidden: boolean = false;
@@ -93,6 +94,7 @@ export class StudentsComponent implements OnInit {
   }
 
   sortTableBy(sortBy: string): void {
+    this.sort = sortBy;
     if (sortBy === "id") {
       this.students.sort((first: Student, second: Student) => {
         return first.id >= second.id ? 1 : -1;
@@ -113,5 +115,13 @@ export class StudentsComponent implements OnInit {
       this.dataHandler.deleteStudent(stud);
       this.students = this.dataHandler.getStudents();
     }
+  }
+
+  isSort(name: string): boolean {
+    if (this.sort === name) {
+      console.log((this.sort));
+      return true;
+    }
+    return false;
   }
 }

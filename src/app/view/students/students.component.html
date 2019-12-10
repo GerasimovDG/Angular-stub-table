@@ -31,11 +31,11 @@
     <table class="table table-hover" >
       <thead class="table-header">
       <th (click)="sortTableBy('id'); sortUp = !sortUp">#</th>
-      <th (click)="sortTableBy('lastName'); sortUp = !sortUp">Фамилия</th>
-      <th (click)="sortTableBy('firstName'); sortUp = !sortUp">Имя</th>
-      <th (click)="sortTableBy('middleName'); sortUp = !sortUp">Отчество</th>
-      <th (click)="sortTableBy('birthday'); sortUp = !sortUp">Дата рождения</th>
-      <th (click)="sortTableBy('averageMark'); sortUp = !sortUp">Средний балл</th>
+      <th [ngClass]="{'active' : isSort('lastName')}" (click)="sortTableBy('lastName'); sortUp = !sortUp">Фамилия</th>
+      <th [ngClass]="{'active' : isSort('firstName')}" (click)="sortTableBy('firstName'); sortUp = !sortUp">Имя</th>
+      <th [ngClass]="{'active' : isSort('middleName')}" (click)="sortTableBy('middleName'); sortUp = !sortUp">Отчество</th>
+      <th [ngClass]="{'active' : isSort('birthday')}" (click)="sortTableBy('birthday'); sortUp = !sortUp">Дата рождения</th>
+      <th [ngClass]="{'active' : isSort('averageMark')}" (click)="sortTableBy('averageMark'); sortUp = !sortUp">Средний балл</th>
       <th></th>
       <th></th>
       </thead>
