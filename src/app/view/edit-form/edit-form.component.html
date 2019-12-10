@@ -1,6 +1,6 @@
 <div class="bground">
   <div class="container">
-    <form novalidate class="form" [formGroup]="delForm"  (ngSubmit)="submitEditStudent()">
+    <form novalidate class="form" [formGroup]="form"  (ngSubmit)="submitEditStudent()">
       <div (click)=" this.dataHandler.isCallDelFormService=false" class="close">&times;</div>
       <h1>Редактирование данных</h1>
       <h2>{{ this.dataHandler.student.lastName }}
@@ -11,56 +11,56 @@
           <label>Фамилия</label>
           <input type="text" placeholder="Фамилия" formControlName="lastName">
           <div class="validation"
-               *ngIf="delForm.get('fio').get('lastName').invalid && delForm.get('fio').get('lastName').touched"
+               *ngIf="form.get('fio').get('lastName').invalid && form.get('fio').get('lastName').touched"
           >
-            <small *ngIf="delForm.get('fio').get('lastName').errors.required">Поле не должно быть пустым</small>
+            <small *ngIf="form.get('fio').get('lastName').errors.required">Поле не должно быть пустым</small>
           </div>
         </div>
         <div class="form-control">
           <label>Имя</label>
           <input type="text" placeholder="Имя" formControlName="firstName">
           <div class="validation"
-               *ngIf="delForm.get('fio').get('firstName').invalid && delForm.get('fio').get('firstName').touched"
+               *ngIf="form.get('fio').get('firstName').invalid && form.get('fio').get('firstName').touched"
           >
-            <small *ngIf="delForm.get('fio').get('firstName').errors.required">Поле не должно быть пустым</small>
+            <small *ngIf="form.get('fio').get('firstName').errors.required">Поле не должно быть пустым</small>
           </div>
         </div>
         <div class="form-control">
           <label>Отчество</label>
           <input type="text" placeholder="Отчество" formControlName="middleName">
           <div class="validation"
-               *ngIf="delForm.get('fio').get('middleName').invalid && delForm.get('fio').get('middleName').touched"
+               *ngIf="form.get('fio').get('middleName').invalid && form.get('fio').get('middleName').touched"
           >
-            <small *ngIf="delForm.get('fio').get('middleName').errors.required">Поле не должно быть пустым</small>
+            <small *ngIf="form.get('fio').get('middleName').errors.required">Поле не должно быть пустым</small>
           </div>
         </div>
         <div class="validation">
-          <small *ngIf="delForm.get('fio').errors && delForm.get('fio').errors.restrictedFio">Имя не должно совпадать с фамилией или отчеством </small>
+          <small *ngIf="form.get('fio').errors && form.get('fio').errors.restrictedFio">Имя не должно совпадать с фамилией или отчеством </small>
         </div>
       </div>
       <div class="form-control">
         <label>Дата рождения</label>
         <input type="date" formControlName="birthday">
         <div class="validation">
-          <small *ngIf="delForm.get('birthday').errors && delForm.get('birthday').errors.restrictedDate">Человеку должно быть меньше 10 лет</small>
+          <small *ngIf="form.get('birthday').errors && form.get('birthday').errors.restrictedDate">Человеку должно быть меньше 10 лет</small>
         </div>
       </div>
       <div class="form-control">
         <label>Средняя оценка</label>
         <input type="text" placeholder="4.4" formControlName="mark">
-        <div class="validation" *ngIf="delForm.get('mark').invalid && delForm.get('mark').touched">
+        <div class="validation" *ngIf="form.get('mark').invalid && form.get('mark').touched">
           <small
-            *ngIf="delForm.get('mark').errors.required"
+            *ngIf="form.get('mark').errors.required"
           >Введите оценку от 0 до 5</small>
           <small
-            *ngIf="delForm.get('mark').errors.min"
-          >Оценка должна быть больше {{delForm.get('mark').errors.min.min }} </small>
+            *ngIf="form.get('mark').errors.min"
+          >Оценка должна быть больше {{form.get('mark').errors.min.min }} </small>
           <small
-            *ngIf=" delForm.get('mark').errors.max"
-          >Оценка должна быть меньше {{delForm.get('mark').errors.max.max}} </small>
+            *ngIf=" form.get('mark').errors.max"
+          >Оценка должна быть меньше {{form.get('mark').errors.max.max}} </small>
         </div>
       </div>
-      <button class="form-button" [ngClass]="{'form-button_enabled' : delForm.valid}" type="submit">Сохранить</button>
+      <button class="form-button" [ngClass]="{'form-button_enabled' : form.valid}" type="submit">Сохранить</button>
     </form>
   </div>
 </div>

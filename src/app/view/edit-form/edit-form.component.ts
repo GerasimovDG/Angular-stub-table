@@ -1,33 +1,18 @@
 import { Component, OnInit } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Student } from "../../model/students";
-import { DataHandlerService } from "../../service/data-handler.service";
-import { MyValidators } from "../my.validators";
+import { BasicFormComponent } from "../basic-form/basic-form.component";
 
 @Component({
   selector: "app-edit-form",
   templateUrl: "./edit-form.component.html",
   styleUrls: ["./edit-form.component.less"]
 })
-export class EditFormComponent implements OnInit {
-
-  delForm: FormGroup;
-
-  constructor(private dataHandler: DataHandlerService) {}
+export class EditFormComponent extends BasicFormComponent implements OnInit {
 
   ngOnInit(): void {
-    this.delForm = new FormGroup( {
-      fio: new FormGroup( {
-        lastName: new FormControl("", [Validators.required]),
-        firstName: new FormControl("", [Validators.required]),
-        middleName: new FormControl("", [Validators.required])
-      }, [Validators.required, MyValidators.restrictedFIO ]),
-      birthday: new FormControl("", [Validators.required, MyValidators.restrictedDate]),
-      mark: new FormControl("", [Validators.required, Validators.max(5), Validators.min(0)]),
-    });
+    super.ngOnInit();
     this.setEditStudent(this.dataHandler.student);
   }
-
 
 
   formatDate(date: Date): string {
@@ -44,27 +29,17 @@ export class EditFormComponent implements OnInit {
   }
 
   setEditStudent(student: Student): void {
-    this.delForm.patchValue({fio: student});
-    this.delForm.patchValue({birthday: this.formatDate(student.birthday)  });
-    this.delForm.patchValue({mark: student.averageMark});
+    this.form.patchValue({fio: student});
+    this.form.patchValue({birthday: this.formatDate(student.birthday)  });
+    this.form.patchValue({mark: student.averageMark});
   }
 
   submitEditStudent(): void {
-    if (this.delForm.valid) {
-      const data = {...this.delForm.value};
-
-      const newStudent: Student = new Student(
-        this.dataHandler.student.id,
-        data.fio.lastName,
-        data.fio.firstName,
-        data.fio.middleName,
-        new Date(data.birthday),
-        data.mark,
-      );
-      this.dataHandler.editStudent(newStudent);
+    if (this.form.valid) {
+      super.submitStudent();
+      this.newStudent.id = this.dataHandler.student.id;
+      this.dataHandler.editStudent(this.newStudent);
       this.dataHandler.isCallDelFormService = false;
-      this.dataHandler.student = newStudent;
-      this.delForm.reset();
     }
   }
 
