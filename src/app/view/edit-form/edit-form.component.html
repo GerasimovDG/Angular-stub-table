@@ -1,7 +1,7 @@
 <div class="bground">
   <div class="container">
     <form novalidate class="form" [formGroup]="form"  (ngSubmit)="submitEditStudent()">
-      <div (click)=" this.dataHandler.isCallDelFormService=false" class="close">&times;</div>
+      <div (click)=" this.dataHandler.isCallEditFormService=false" class="close">&times;</div>
       <h1>Редактирование данных</h1>
       <h2>{{ this.dataHandler.student.lastName }}
         {{ this.dataHandler.student.firstName }}
@@ -42,7 +42,7 @@
         <label>Дата рождения</label>
         <input type="date" formControlName="birthday">
         <div class="validation">
-          <small *ngIf="form.get('birthday').errors && form.get('birthday').errors.restrictedDate">Человеку должно быть меньше 10 лет</small>
+          <small *ngIf="form.get('birthday').errors && form.get('birthday').errors.restrictedDate">Человеку должно быть больше 10 лет</small>
         </div>
       </div>
       <div class="form-control">

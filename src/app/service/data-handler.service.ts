@@ -10,7 +10,7 @@ export class DataHandlerService {
   // флаг, отвечающий за открытие формы добавления студента
   isCallFormService: boolean = false;
   // флаг, отвечающий за открытие формы редактирования студента
-  isCallDelFormService: boolean = false;
+  isCallEditFormService: boolean = false;
   student: Student;
 
   getStudents(): Student[] {
@@ -31,7 +31,7 @@ export class DataHandlerService {
 
   setEditStudent(stud: Student): void {
     this.student = stud;
-    this.isCallDelFormService = true;
+    this.isCallEditFormService = true;
   }
 
   editStudent(stud: Student): void {

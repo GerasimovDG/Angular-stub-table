@@ -19,7 +19,7 @@ export class MyValidators {
 
     let flag: boolean = false;
     // 315360000000 + 172800000 миллисекунд = 10 лет + 2 дня из двух високосных годов
-    if (nowDate.getTime() - birthday.getTime() > (315360000000 + 172800000)) {
+    if (nowDate.getTime() - birthday.getTime() < (315360000000 + 172800000)) {
           flag = true;
     }
 

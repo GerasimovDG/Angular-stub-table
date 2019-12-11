@@ -39,7 +39,7 @@ export class EditFormComponent extends BasicFormComponent implements OnInit {
       super.submitStudent();
       this.newStudent.id = this.dataHandler.student.id;
       this.dataHandler.editStudent(this.newStudent);
-      this.dataHandler.isCallDelFormService = false;
+      this.dataHandler.isCallEditFormService = false;
     }
   }
 
