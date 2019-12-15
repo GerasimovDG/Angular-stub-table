@@ -49,8 +49,8 @@
         <td>{{student.lastName}}</td>
         <td>{{student.firstName}}</td>
         <td>{{student.middleName}}</td>
-        <td>{{student.birthday | date:"dd.MM.yyyy"}}</td>
-        <td>{{student.averageMark }}</td>
+        <td>{{student.birthday | date:"dd.MM.yyyy" | dateYears}}</td>
+        <td>{{student.averageMark | formatMark:"UK"}}</td>
         <td>
           <div class="edit" (click)="this.dataHandler.setEditStudent(student)" >
             <i class="fas fa-edit"></i>
