@@ -19,6 +19,7 @@ export class StudentsComponent implements OnInit {
   students: Student[] = this.dataHandler.getStudents();
   feature: boolean = true;
   search: string = "";
+  lastNameSearch: string = "";
 
   searchOption = SearchOption;
   searchField = this.searchOption.All;

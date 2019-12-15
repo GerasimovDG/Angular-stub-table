@@ -21,7 +21,8 @@
   <div class="view-block">
     <div class="view-filter">
       <div class="view-filter__name">Фильтр:</div>
-      <input class="input view-filter__input" type="text" placeholder="По среднему баллу" [(ngModel)]="mark" (ngModelChange)="setStudentsByMark()">
+      <input class="input view-filter__input" type="text" placeholder="По фамилии" [(ngModel)]="lastNameSearch">
+      <input class="input view-filter__input" type="text" placeholder="По среднему баллу" [(ngModel)]="mark"  (ngModelChange)="setStudentsByMark()">
       <input class="input view-filter__input" type="date" placeholder="По дате рождения" [(ngModel)]="birthday" (ngModelChange)="setStudentsByBirthday()"></div>
     <div class="view-button">
       <button class="view-button__button" (click)="this.dataHandler.isCallFormService = true">Добавить студента</button>
@@ -43,13 +44,13 @@
       <tr [ngClass]="{
             'table-body_red' : student.averageMark < 3 && getFeature(),
             'table-body_green' : isSearch(student)
-          }"  *ngFor="let student of students; trackBy:trackByStudentID; let i = index">
+          }"  *ngFor="let student of students | filter:lastNameSearch; trackBy:trackByStudentID; let i = index">
         <td>{{i + 1}}</td>
         <td>{{student.lastName}}</td>
         <td>{{student.firstName}}</td>
         <td>{{student.middleName}}</td>
         <td>{{student.birthday | date:"dd.MM.yyyy"}}</td>
-        <td>{{student.averageMark}}</td>
+        <td>{{student.averageMark }}</td>
         <td>
           <div class="edit" (click)="this.dataHandler.setEditStudent(student)" >
             <i class="fas fa-edit"></i>

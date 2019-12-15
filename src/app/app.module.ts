@@ -3,6 +3,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
 
 import { AppComponent } from "./app.component";
+import { FilterPipe } from "./pipes/filter.pipe";
 import { AddFromComponent } from "./view/add-from/add-from.component";
 import { BasicFormComponent } from "./view/basic-form/basic-form.component";
 import { EditFormComponent } from "./view/edit-form/edit-form.component";
@@ -15,6 +16,7 @@ import { StudentsComponent } from "./view/students/students.component";
     AddFromComponent,
     EditFormComponent,
     BasicFormComponent,
+    FilterPipe,
   ],
   imports: [
     BrowserModule,
