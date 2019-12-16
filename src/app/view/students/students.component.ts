@@ -16,7 +16,7 @@ enum SearchOption {
 })
 
 export class StudentsComponent implements OnInit {
-  @Input() flag: boolean;
+  @Input() updateFlag: boolean;
 
   students: Student[] = this.dataHandler.getStudents();
   feature: boolean = true;

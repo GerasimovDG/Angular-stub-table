@@ -1,24 +1,33 @@
-import { Directive, ElementRef, HostListener, Renderer2 } from "@angular/core";
+import { Directive, ElementRef, HostListener, Input, Renderer2 } from "@angular/core";
+import { Student } from "../model/students";
 
 @Directive({
   selector: "[appHighlight]"
 })
 export class HighlightDirective {
+
+  @Input("appHighlight") mark: number;
   flag: boolean = false;
 
   constructor(private renderer: Renderer2, private el: ElementRef) {
   }
 
-
   @HostListener("dblclick") onClick(): void {
     this.flag = !this.flag;
     if (this.flag) {
-      this.renderer.removeClass(this.el.nativeElement, "highlight")
-      this.renderer.addClass(this.el.nativeElement , "highlight");
-      // this.renderer.setStyle(this.el.nativeElement, "backgroundColor", "rgba(0, 0, 0, 0.07)");
+      if (this.mark >= 4.5) {
+        this.renderer.setStyle(this.el.nativeElement, "backgroundColor", "rgba(0,204,102,0.2)");
+        this.renderer.setStyle(this.el.nativeElement, "border", "2px solid #F56433");
+      } else if (this.mark < 3) {
+        this.renderer.setStyle(this.el.nativeElement, "backgroundColor", "rgba(100, 0, 0, 0.5)");
+        this.renderer.setStyle(this.el.nativeElement, "border", "2px solid #F56433");
+      } else {
+        this.renderer.setStyle(this.el.nativeElement, "backgroundColor", "rgba(0, 0, 0, 0.1)");
+        this.renderer.setStyle(this.el.nativeElement, "border", "2px solid #F56433");
+      }
     } else {
-      this.renderer.removeClass(this.el.nativeElement, "highlight");
-      // this.renderer.setStyle(this.el.nativeElement, "backgroundColor",  null);
+      this.renderer.setStyle(this.el.nativeElement, "backgroundColor", null);
+      this.renderer.setStyle(this.el.nativeElement, "border", null);
     }
   }
 

@@ -1,5 +1,5 @@
 <div class="container">
-  <app-students [flag]="dataHandler.toggleForUpdate"></app-students>
+  <app-students [updateFlag]="dataHandler.toggleForUpdate"></app-students>
   <app-add-from *ngIf="dataHandler.isCallFormService"></app-add-from>
   <app-edit-form *ngIf="dataHandler.isCallEditFormService"></app-edit-form>
 </div>

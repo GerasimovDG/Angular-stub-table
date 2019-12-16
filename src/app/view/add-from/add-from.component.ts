@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
-import { DataHandlerService } from "../../service/data-handler.service";
 import { BasicFormComponent } from "../basic-form/basic-form.component";
 
 @Component({
@@ -9,7 +8,6 @@ import { BasicFormComponent } from "../basic-form/basic-form.component";
   styleUrls: ["./add-from.component.less"]
 })
 export class AddFromComponent extends BasicFormComponent implements OnInit {
-
 
   ngOnInit(): void {
     console.log("aaa");

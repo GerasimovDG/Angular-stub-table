@@ -41,7 +41,7 @@
       <th></th>
       </thead>
       <tbody class="table-body">
-      <tr appHighlight [ngClass]="{
+      <tr [appHighlight]="student.averageMark" [ngClass]="{
             'table-body_red' : student.averageMark < 3 && getFeature(),
             'table-body_green' : isSearch(student)
           }"
