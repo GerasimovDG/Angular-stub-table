@@ -9,7 +9,7 @@ export class FormatMarkPipe implements PipeTransform {
   transform(mark: number, type: string = "percent"): string {
     switch (type) {
       case "percent":
-          return `${ mark * (100 / 5) } %  (${mark})`;
+          return `${ mark * (100 / 5) }%  (${mark})` ;
           break;
       case "UK":
         return (mark * (12 / 5)).toFixed(2).toString() + ` (${mark})`;

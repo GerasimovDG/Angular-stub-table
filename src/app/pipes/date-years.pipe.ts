@@ -11,16 +11,15 @@ export class DateYearsPipe implements PipeTransform {
     const valueDate = new Date(parseInt(date [2], 10),
       parseInt(date [1], 10) - 1,
       parseInt(date [0], 10));
-    // return valueDate;
     if (nowDate.getMonth() - valueDate.getMonth() < 0) {
       return `${value} (${(nowDate.getFullYear() - valueDate.getFullYear() - 1).toString()})`;
     }
     if (nowDate.getMonth() - valueDate.getMonth() > 0) {
-      return `${value} (${(nowDate.getFullYear() - valueDate.getFullYear()).toString()})`;
+      return `${value} (${(nowDate.getFullYear() - valueDate.getFullYear()).toString()}) `;
     }
     if (nowDate.getMonth() - valueDate.getMonth() === 0) {
       if (nowDate.getDate() - valueDate.getDate() < 0) {
-        return `${value} (${(nowDate.getFullYear() - valueDate.getFullYear() - 1).toString()})`;
+        return `${value} (${(nowDate.getFullYear() - valueDate.getFullYear() - 1).toString()}) `;
       }
       if (nowDate.getDate() - valueDate.getDate() >= 0) {
         return `${value} (${(nowDate.getFullYear() - valueDate.getFullYear()).toString()})`;

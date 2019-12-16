@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from "@angular/core";
 import { Student } from "../../model/students";
 import { DataHandlerService } from "../../service/data-handler.service";
 
@@ -10,11 +10,13 @@ enum SearchOption {
 }
 @Component({
   selector: "app-students",
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: "./students.component.html",
   styleUrls: ["./students.component.less"]
 })
 
 export class StudentsComponent implements OnInit {
+  @Input() flag: boolean;
 
   students: Student[] = this.dataHandler.getStudents();
   feature: boolean = true;
@@ -31,7 +33,11 @@ export class StudentsComponent implements OnInit {
 
   delStudent: Student = new Student();
   hidden: boolean = false;
-  constructor(private dataHandler: DataHandlerService) { }
+  constructor(private cdr: ChangeDetectorRef, private dataHandler: DataHandlerService) { }
+
+  detect(): void {
+    this.cdr.detectChanges();
+  }
 
   ngOnInit(): void {
     this.students = this.dataHandler.getStudents();

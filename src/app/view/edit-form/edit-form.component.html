@@ -1,7 +1,7 @@
 <div class="bground">
   <div class="container">
     <form novalidate class="form" [formGroup]="form"  (ngSubmit)="submitEditStudent()">
-      <div (click)=" this.dataHandler.isCallEditFormService=false" class="close">&times;</div>
+      <div (click)="this.dataHandler.isCallEditFormService=false" class="close">&times;</div>
       <h1>Редактирование данных</h1>
       <h2>{{ this.dataHandler.student.lastName }}
         {{ this.dataHandler.student.firstName }}

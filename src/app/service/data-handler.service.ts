@@ -2,11 +2,13 @@ import { Injectable } from "@angular/core";
 import { TestData } from "../data/test-data";
 import { Student } from "../model/students";
 
+
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class DataHandlerService {
-
+  // переключатель, с помощью которого срабатывает ChangeDetectionStrategy.onPush
+  toggleForUpdate: boolean = false;
   // флаг, отвечающий за открытие формы добавления студента
   isCallFormService: boolean = false;
   // флаг, отвечающий за открытие формы редактирования студента
@@ -27,6 +29,10 @@ export class DataHandlerService {
 
   deleteStudent(stud: Student): void {
     TestData.students = TestData.students.filter(student => student !== stud);
+  }
+
+  openAddForm(): void {
+    this.isCallFormService = true;
   }
 
   setEditStudent(stud: Student): void {

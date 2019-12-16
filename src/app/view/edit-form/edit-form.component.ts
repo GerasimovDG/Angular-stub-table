@@ -1,9 +1,10 @@
-import { Component, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { Student } from "../../model/students";
 import { BasicFormComponent } from "../basic-form/basic-form.component";
 
 @Component({
   selector: "app-edit-form",
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: "./edit-form.component.html",
   styleUrls: ["./edit-form.component.less"]
 })
@@ -40,7 +41,7 @@ export class EditFormComponent extends BasicFormComponent implements OnInit {
       this.newStudent.id = this.dataHandler.student.id;
       this.dataHandler.editStudent(this.newStudent);
       this.dataHandler.isCallEditFormService = false;
+      this.dataHandler.toggleForUpdate = !this.dataHandler.toggleForUpdate;
     }
   }
-
 }
