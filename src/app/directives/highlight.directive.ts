@@ -1,5 +1,4 @@
 import { Directive, ElementRef, HostListener, Input, Renderer2 } from "@angular/core";
-import { Student } from "../model/students";
 
 @Directive({
   selector: "[appHighlight]"
@@ -16,7 +15,7 @@ export class HighlightDirective {
     this.flag = !this.flag;
     if (this.flag) {
       if (this.mark >= 4.5) {
-        this.renderer.setStyle(this.el.nativeElement, "backgroundColor", "rgba(0,204,102,0.2)");
+        this.renderer.setStyle(this.el.nativeElement, "backgroundColor", "rgba(0,204,102,0.3)");
         this.renderer.setStyle(this.el.nativeElement, "border", "2px solid #F56433");
       } else if (this.mark < 3) {
         this.renderer.setStyle(this.el.nativeElement, "backgroundColor", "rgba(100, 0, 0, 0.5)");

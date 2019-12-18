@@ -4,6 +4,7 @@ import { BrowserModule } from "@angular/platform-browser";
 
 import { AppComponent } from "./app.component";
 import { HighlightDirective } from "./directives/highlight.directive";
+import { InfoDirective } from "./directives/info.directive";
 import { DateYearsPipe } from "./pipes/date-years.pipe";
 import { FilterPipe } from "./pipes/filter.pipe";
 import { FormatMarkPipe } from "./pipes/format-mark.pipe";
@@ -25,6 +26,7 @@ import { StudentsComponent } from "./view/students/students.component";
     DateYearsPipe,
     GoodMarkPipe,
     HighlightDirective,
+    InfoDirective,
   ],
   imports: [
     BrowserModule,

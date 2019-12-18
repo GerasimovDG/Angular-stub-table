@@ -29,8 +29,8 @@
     </div>
   </div>
   <div class="view-body table-responsive">
-    <table class="table table-hover" >
-      <thead class="table-header">
+    <table class="table" >
+      <thead class=" table-header">
       <th (click)="sortTableBy('id'); sortUp = !sortUp">#</th>
       <th [ngClass]="{'active' : isSort('lastName')}" (click)="sortTableBy('lastName'); sortUp = !sortUp">Фамилия</th>
       <th [ngClass]="{'active' : isSort('firstName')}" (click)="sortTableBy('firstName'); sortUp = !sortUp">Имя</th>
@@ -40,13 +40,15 @@
       <th></th>
       <th></th>
       </thead>
-      <tbody class="table-body">
-      <tr [appHighlight]="student.averageMark" [ngClass]="{
-            'table-body_red' : student.averageMark < 3 && getFeature(),
-            'table-body_green' : isSearch(student)
-          }"
-          *ngFor="let student of students | filter:lastNameSearch; trackBy:trackByStudentID; let i = index"
-      >
+      <tbody [appInfo]="student.info"
+             [appHighlight]="student.averageMark"
+             *ngFor="let student of students | filter:lastNameSearch; trackBy:trackByStudentID; let i = index" class="table-body"
+             [ngClass]="{
+                'table-body_red' : student.averageMark < 3 && getFeature(),
+                'table-body_green' : isSearch(student)
+              }"
+            >
+      <tr>
         <td>{{i + 1}}</td>
         <td class="table-body__element">{{student.lastName}}</td>
         <td class="table-body__element">{{student.firstName}}</td>
