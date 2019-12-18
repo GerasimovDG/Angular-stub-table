@@ -8,7 +8,7 @@
   </div>
   <div class="view-search">
     <label for="search"></label>
-    <input id="search" class="input view-search__input " type="text" placeholder="Поиск" [(ngModel)]="search">
+    <input id="search" class="view-search__input input" type="text" placeholder="Поиск" [(ngModel)]="search">
     <button class="view-search__button"
             [ngClass]="{ 'view-search__button_active' : searchField == this.searchOption.LastName}"
             (click)="searchField = this.searchOption.LastName">по фамилии</button>
