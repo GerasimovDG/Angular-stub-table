@@ -3,11 +3,12 @@
     <h4 class="view-header__title">Список студентов</h4>
     <label class="view-header__checkbox">
       <input (click)="toggleFeature()" type="checkbox" checked="checked" />
-      <div class="view-header__checkbox__text">Выделение двоечников</div>
+      <span class="view-header__checkbox__text">Выделение двоечников</span>
     </label>
   </div>
   <div class="view-search">
-    <input class="input view-search__input " type="text" placeholder="Поиск" [(ngModel)]="search">
+    <label for="search"></label>
+    <input id="search" class="input view-search__input " type="text" placeholder="Поиск" [(ngModel)]="search">
     <button class="view-search__button"
             [ngClass]="{ 'view-search__button_active' : searchField == this.searchOption.LastName}"
             (click)="searchField = this.searchOption.LastName">по фамилии</button>
@@ -21,16 +22,22 @@
   <div class="view-block">
     <div class="view-filter">
       <div class="view-filter__name">Фильтр:</div>
-      <input class="input view-filter__input" type="text" placeholder="По фамилии" [(ngModel)]="lastNameSearch">
-      <input class="input view-filter__input" type="text" placeholder="По среднему баллу" [(ngModel)]="mark"  (ngModelChange)="setStudentsByMark()">
-      <input class="input view-filter__input" type="date" placeholder="По дате рождения" [(ngModel)]="birthday" (ngModelChange)="setStudentsByBirthday()"></div>
+      <label for="lastNameSearch"></label>
+      <input id="lastNameSearch" class="input view-filter__input" type="text" placeholder="По фамилии" [(ngModel)]="lastNameSearch">
+
+      <label for="markSearch"></label>
+      <input id="markSearch" class="input view-filter__input" type="text" placeholder="По среднему баллу" [(ngModel)]="mark" (ngModelChange)="setStudentsByMark()">
+
+      <label for="birthdaySearch"></label>
+      <input id="birthdaySearch" class="input view-filter__input" type="date" placeholder="По дате рождения" [(ngModel)]="birthday" (ngModelChange)="setStudentsByBirthday()"></div>
     <div class="view-button">
-      <button class="view-button__button" (click)="this.dataHandler.openAddForm()">Добавить студента</button>
+      <button class="view-button__button" (click)="openAddForm()">Добавить студента</button>
     </div>
   </div>
   <div class="view-body table-responsive">
     <table class="table" >
       <thead class=" table-header">
+      <tr>
       <th (click)="sortTableBy('id'); sortUp = !sortUp">#</th>
       <th [ngClass]="{'active' : isSort('lastName')}" (click)="sortTableBy('lastName'); sortUp = !sortUp">Фамилия</th>
       <th [ngClass]="{'active' : isSort('firstName')}" (click)="sortTableBy('firstName'); sortUp = !sortUp">Имя</th>
@@ -39,6 +46,7 @@
       <th [ngClass]="{'active' : isSort('averageMark')}" (click)="sortTableBy('averageMark'); sortUp = !sortUp">Средний балл</th>
       <th></th>
       <th></th>
+      </tr>
       </thead>
       <tbody [appInfo]="student.info"
              [appHighlight]="student.averageMark"
@@ -58,7 +66,7 @@
         <span class="gift" [innerHTML] = "student.averageMark | goodMark"></span>
         </td>
         <td>
-          <div class="edit" (click)="this.dataHandler.setEditStudent(student)" >
+          <div class="edit" (click)="setEditStudent(student)" >
             <i class="fas fa-edit"></i>
           </div>
         </td>
@@ -72,6 +80,7 @@
     </table>
   </div>
 </div>
+
 <div class="hidden" [ngClass]="{'hidden_active' : hidden}">
   <div id="confirm" class="confirm">
     <h2>Вы уверены, что хотите удалить студента?</h2>
@@ -80,5 +89,11 @@
     <button class="confirm__button confirm__button_cancel" (click)="hidden = false">Отмена</button>
   </div>
 </div>
+
+<app-add-form (onCloseForm)="isAddForm = false" *ngIf="isAddForm"></app-add-form>
+<app-edit-form [editStudent]="this.editStudent"
+               *ngIf="isEditForm"
+              (onEdit)="isEditForm = false"
+></app-edit-form>
 
 

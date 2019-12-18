@@ -1,15 +1,16 @@
 <div class="bground">
   <div class="container">
     <form novalidate class="form" [formGroup]="form"  (ngSubmit)="submitEditStudent()">
-      <div (click)="this.dataHandler.isCallEditFormService=false" class="close">&times;</div>
+<!--      <div (click)="this.dataHandler.isCallEditFormService=false" class="close">&times;</div>-->
+      <div (click)="closeEditForm()" class="close">&times;</div>
       <h1>Редактирование данных</h1>
-      <h2>{{ this.dataHandler.student.lastName }}
-        {{ this.dataHandler.student.firstName }}
-        {{ this.dataHandler.student.middleName }}</h2>
+      <h2>{{ editStudent.lastName }}
+        {{ editStudent.firstName }}
+        {{ editStudent.middleName }}</h2>
       <div class="form" formGroupName="fio">
         <div class="form-control">
-          <label>Фамилия</label>
-          <input type="text" placeholder="Фамилия" formControlName="lastName">
+          <label for="lastName">Фамилия</label>
+          <input id="lastName" type="text" placeholder="Фамилия" formControlName="lastName">
           <div class="validation"
                *ngIf="form.get('fio').get('lastName').invalid && form.get('fio').get('lastName').touched"
           >
@@ -17,8 +18,8 @@
           </div>
         </div>
         <div class="form-control">
-          <label>Имя</label>
-          <input type="text" placeholder="Имя" formControlName="firstName">
+          <label for="firstName">Имя</label>
+          <input id="firstName" type="text" placeholder="Имя" formControlName="firstName">
           <div class="validation"
                *ngIf="form.get('fio').get('firstName').invalid && form.get('fio').get('firstName').touched"
           >
@@ -26,8 +27,8 @@
           </div>
         </div>
         <div class="form-control">
-          <label>Отчество</label>
-          <input type="text" placeholder="Отчество" formControlName="middleName">
+          <label for="middleName">Отчество</label>
+          <input id="middleName" type="text" placeholder="Отчество" formControlName="middleName">
           <div class="validation"
                *ngIf="form.get('fio').get('middleName').invalid && form.get('fio').get('middleName').touched"
           >
@@ -39,15 +40,15 @@
         </div>
       </div>
       <div class="form-control">
-        <label>Дата рождения</label>
-        <input type="date" formControlName="birthday">
+        <label for="birthday">Дата рождения</label>
+        <input id="birthday" type="date" formControlName="birthday">
         <div class="validation">
           <small *ngIf="form.get('birthday').errors && form.get('birthday').errors.restrictedDate">Человеку должно быть больше 10 лет</small>
         </div>
       </div>
       <div class="form-control">
-        <label>Средняя оценка</label>
-        <input type="text" placeholder="4.4" formControlName="mark">
+        <label for="mark">Средняя оценка</label>
+        <input id="mark" type="text" placeholder="4.4" formControlName="mark">
         <div class="validation" *ngIf="form.get('mark').invalid && form.get('mark').touched">
           <small
             *ngIf="form.get('mark').errors.required"

@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
-import { Student } from "../../model/students";
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { Student } from "../../../model/students";
 import { BasicFormComponent } from "../basic-form/basic-form.component";
 
 @Component({
@@ -10,11 +10,16 @@ import { BasicFormComponent } from "../basic-form/basic-form.component";
 })
 export class EditFormComponent extends BasicFormComponent implements OnInit {
 
+  @Input() editStudent: Student;
+
+  @Output() onEdit: EventEmitter<boolean> = new EventEmitter<boolean>();
+  private isCallEditForm: boolean;
+
   ngOnInit(): void {
     super.ngOnInit();
-    this.setEditStudent(this.dataHandler.student);
+    console.dir(this.editStudent);
+    this.setEditStudent(this.editStudent);
   }
-
 
   formatDate(date: Date): string {
     const year = date.getFullYear();
@@ -30,18 +35,27 @@ export class EditFormComponent extends BasicFormComponent implements OnInit {
   }
 
   setEditStudent(student: Student): void {
+    console.dir(student);
     this.form.patchValue({fio: student});
     this.form.patchValue({birthday: this.formatDate(student.birthday)  });
     this.form.patchValue({mark: student.averageMark});
   }
 
+  closeEditForm(): void {
+    this.isCallEditForm = false;
+    this.onEdit.emit(this.isCallEditForm);
+  }
+
   submitEditStudent(): void {
     if (this.form.valid) {
       super.submitStudent();
-      this.newStudent.id = this.dataHandler.student.id;
+      this.newStudent.id = this.editStudent.id;
+      // this.newStudent.id = this.dataHandler.student.id;
       this.dataHandler.editStudent(this.newStudent);
-      this.dataHandler.isCallEditFormService = false;
-      this.dataHandler.toggleForUpdate = !this.dataHandler.toggleForUpdate;
+      // this.dataHandler.isCallEditFormService = false;
+      // this.dataHandler.toggleForUpdate = !this.dataHandler.toggleForUpdate;
+      this.isCallEditForm = false;
+      this.onEdit.emit(this.isCallEditForm);
     }
   }
 }

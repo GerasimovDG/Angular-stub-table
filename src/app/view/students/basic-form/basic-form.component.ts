@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { Student } from "../../model/students";
-import { DataHandlerService } from "../../service/data-handler.service";
-import { MyValidators } from "../my.validators";
+import { Student } from "../../../model/students";
+import { DataHandlerService } from "../../../service/data-handler.service";
+import { MyValidators } from "../../my.validators";
 
 @Component({
   selector: "app-basic-form",

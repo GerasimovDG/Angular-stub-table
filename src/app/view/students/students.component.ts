@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from "@angular/core";
 import { Student } from "../../model/students";
 import { DataHandlerService } from "../../service/data-handler.service";
 
@@ -16,7 +16,7 @@ enum SearchOption {
 })
 
 export class StudentsComponent implements OnInit {
-  @Input() updateFlag: boolean;
+  // @Input() updateFlag: boolean;
 
   students: Student[] = this.dataHandler.getStudents();
   feature: boolean = true;
@@ -33,6 +33,10 @@ export class StudentsComponent implements OnInit {
 
   delStudent: Student = new Student();
   hidden: boolean = false;
+  private editStudent: Student;
+  private isEditForm: boolean;
+  private isAddForm: boolean;
+
   constructor(private cdr: ChangeDetectorRef, private dataHandler: DataHandlerService) { }
 
   detect(): void {
@@ -51,7 +55,7 @@ export class StudentsComponent implements OnInit {
     return this.feature;
   }
 
-  trackByStudentID( student: Student): number {
+  trackByStudentID(index: number, student: Student): number {
     return student.id;
   }
 
@@ -130,5 +134,16 @@ export class StudentsComponent implements OnInit {
       return true;
     }
     return false;
+  }
+
+  setEditStudent(student: Student): void {
+    this.isEditForm = true;
+    this.dataHandler.setEditStudent(student);
+    this.editStudent = student;
+  }
+
+  openAddForm(): void {
+    // this.dataHandler.openAddForm();
+    this.isAddForm = true;
   }
 }
