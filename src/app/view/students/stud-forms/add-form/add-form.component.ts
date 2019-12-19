@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from "@angular/core";
-import { BasicFormComponent } from "../basic-form/basic-form.component";
+import { StudFormsComponent } from "../stud-forms.component";
 
 @Component({
   selector: "app-add-form",
@@ -7,7 +7,7 @@ import { BasicFormComponent } from "../basic-form/basic-form.component";
   templateUrl: "./add-form.component.html",
   styleUrls: ["./add-form.component.less"]
 })
-export class AddFormComponent extends BasicFormComponent implements OnInit {
+export class AddFormComponent extends StudFormsComponent implements OnInit {
 
   @Output() onCloseForm: EventEmitter<boolean> = new EventEmitter<boolean>();
   private isCallAddForm: boolean;

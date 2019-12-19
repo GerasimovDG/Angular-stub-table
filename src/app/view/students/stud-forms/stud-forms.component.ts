@@ -5,12 +5,12 @@ import { DataHandlerService } from "../../../service/data-handler.service";
 import { MyValidators } from "../../my.validators";
 
 @Component({
-  selector: "app-basic-form",
+  selector: "app-stud-forms",
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: "./basic-form.component.html",
-  styleUrls: ["./basic-form.component.less"]
+  templateUrl: "./stud-forms.component.html",
+  styleUrls: ["./stud-forms.component.less"]
 })
-export class BasicFormComponent implements OnInit {
+export class StudFormsComponent implements OnInit {
 
   protected form: FormGroup;
   protected newStudent: Student;

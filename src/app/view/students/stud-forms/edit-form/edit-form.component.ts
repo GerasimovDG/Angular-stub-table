@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { Student } from "../../../model/students";
-import { BasicFormComponent } from "../basic-form/basic-form.component";
+import { Student } from "../../../../model/students";
+import { StudFormsComponent } from "../stud-forms.component";
 
 @Component({
   selector: "app-edit-form",
@@ -8,7 +8,7 @@ import { BasicFormComponent } from "../basic-form/basic-form.component";
   templateUrl: "./edit-form.component.html",
   styleUrls: ["./edit-form.component.less"]
 })
-export class EditFormComponent extends BasicFormComponent implements OnInit {
+export class EditFormComponent extends StudFormsComponent implements OnInit {
 
   @Input() editStudent: Student;
 
