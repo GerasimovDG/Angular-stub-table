@@ -139,7 +139,7 @@ export class TestData {
       firstName: "Николай",
       middleName: "Алексеевич",
       birthday: new Date("2001-11-11"),
-      averageMark: 4.9,
+      averageMark: 5,
       info: {
         address: "359428, г. Котовск, ул. Академика Туполева Набережная, дом 92, квартира 71",
         phone: "8 (936) 762-29-41",
