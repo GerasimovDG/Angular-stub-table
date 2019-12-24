@@ -22,11 +22,12 @@ export class EditFormComponent extends StudFormsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    super.ngOnInit();
     this.route.params.subscribe( (params: Params) => {
       console.dir(params);
       this.editStudent = this.dataHandler.getStudents().find( student => student.id.toString() === params.id);
     });
-    super.ngOnInit();
+
     this.setEditStudent(this.editStudent);
   }
 

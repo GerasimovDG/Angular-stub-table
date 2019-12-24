@@ -12,9 +12,7 @@ export class EditGuard implements CanActivate, CanActivateChild {
   canActivate(route: ActivatedRouteSnapshot,
               state: RouterStateSnapshot,
   ): Observable<boolean> | Promise<boolean> | boolean {
-    const mark: number = this.dataHandler.student.averageMark;
-    console.dir(route.params);
-    console.dir(mark);
+    const mark: number = this.dataHandler.getStudents().find( student => student.id.toString() === route.params.id).averageMark;
 
     return !(mark === 5);
   }
