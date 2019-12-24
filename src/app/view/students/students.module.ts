@@ -1,6 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
+import { RouterModule } from "@angular/router";
 import { HighlightDirective } from "../../directives/highlight.directive";
 import { InfoDirective } from "../../directives/info.directive";
 import { DateYearsPipe } from "../../pipes/date-years.pipe";
@@ -29,6 +30,7 @@ import { StudentsComponent } from "./students.component";
     CommonModule,
     FormsModule,
     StudFormsModule,
+    RouterModule,
   ],
   providers: []
 })

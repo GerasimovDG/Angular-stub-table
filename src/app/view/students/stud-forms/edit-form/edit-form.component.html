@@ -2,7 +2,7 @@
   <div class="container">
     <form novalidate class="form" [formGroup]="form"  (ngSubmit)="submitEditStudent()">
 <!--      <div (click)="this.dataHandler.isCallEditFormService=false" class="close">&times;</div>-->
-      <div (click)="closeEditForm()" class="close">&times;</div>
+      <div (click)="closeEditForm()" [routerLink]="['/']" class="close">&times;</div>
       <h1>Редактирование данных</h1>
       <h2>{{ editStudent.lastName }}
         {{ editStudent.firstName }}

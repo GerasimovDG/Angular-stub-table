@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { ActivatedRoute } from "@angular/router";
 import { Student } from "../../../model/students";
 import { DataHandlerService } from "../../../service/data-handler.service";
 import { MyValidators } from "../../my.validators";
@@ -15,7 +16,9 @@ export class StudFormsComponent implements OnInit {
   protected form: FormGroup;
   protected newStudent: Student;
 
-  constructor(protected dataHandler: DataHandlerService) {}
+  constructor(protected dataHandler: DataHandlerService,
+              protected route: ActivatedRoute,
+  ) {}
 
   ngOnInit(): void {
     this.form = new FormGroup( {

@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { ActivatedRoute, Params, Router } from "@angular/router";
 import { Student } from "../../../../model/students";
+import { DataHandlerService } from "../../../../service/data-handler.service";
 import { StudFormsComponent } from "../stud-forms.component";
 
 @Component({
@@ -15,9 +17,16 @@ export class EditFormComponent extends StudFormsComponent implements OnInit {
   @Output() onEdit: EventEmitter<boolean> = new EventEmitter<boolean>();
   private isCallEditForm: boolean;
 
+  constructor(protected dataHandler: DataHandlerService, protected route: ActivatedRoute, private router: Router) {
+    super(dataHandler, route);
+  }
+
   ngOnInit(): void {
+    this.route.params.subscribe( (params: Params) => {
+      console.dir(params);
+      this.editStudent = this.dataHandler.getStudents().find( student => student.id.toString() === params.id);
+    });
     super.ngOnInit();
-    console.dir(this.editStudent);
     this.setEditStudent(this.editStudent);
   }
 
@@ -56,6 +65,7 @@ export class EditFormComponent extends StudFormsComponent implements OnInit {
       // this.dataHandler.toggleForUpdate = !this.dataHandler.toggleForUpdate;
       this.isCallEditForm = false;
       this.onEdit.emit(this.isCallEditForm);
+      this.router.navigate([""]);
     }
   }
 }

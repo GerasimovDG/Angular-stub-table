@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { Student } from "../../model/students";
 import { DataHandlerService } from "../../service/data-handler.service";
 
@@ -37,7 +38,7 @@ export class StudentsComponent implements OnInit {
   private isEditForm: boolean;
   private isAddForm: boolean;
 
-  constructor(private cdr: ChangeDetectorRef, private dataHandler: DataHandlerService) { }
+  constructor(private cdr: ChangeDetectorRef, private dataHandler: DataHandlerService, private router: Router) { }
 
   detect(): void {
     this.cdr.detectChanges();
@@ -140,9 +141,11 @@ export class StudentsComponent implements OnInit {
     this.isEditForm = true;
     this.dataHandler.setEditStudent(student);
     this.editStudent = student;
+    this.router.navigate( ["/form/edit", student.id]);
   }
 
   openAddForm(): void {
+    this.router.navigate(["/form/add"]);
     // this.dataHandler.openAddForm();
     this.isAddForm = true;
   }

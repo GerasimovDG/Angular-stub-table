@@ -31,7 +31,7 @@
       <label for="birthdaySearch"></label>
       <input id="birthdaySearch" class="input view-filter__input" type="date" placeholder="По дате рождения" [(ngModel)]="birthday" (ngModelChange)="setStudentsByBirthday()"></div>
     <div class="view-button">
-      <button class="view-button__button" (click)="openAddForm()">Добавить студента</button>
+      <button class="view-button__button" (click)="openAddForm()" >Добавить студента</button>
     </div>
   </div>
   <div class="view-body table-responsive">
@@ -90,10 +90,11 @@
   </div>
 </div>
 
-<app-add-form (onCloseForm)="isAddForm = false" *ngIf="isAddForm"></app-add-form>
-<app-edit-form [editStudent]="this.editStudent"
-               *ngIf="isEditForm"
-              (onEdit)="isEditForm = false"
-></app-edit-form>
+<!--<app-add-form (onCloseForm)="isAddForm = false" *ngIf="isAddForm"></app-add-form>-->
+<!--<app-edit-form [editStudent]="this.editStudent"-->
+<!--               *ngIf="isEditForm"-->
+<!--              (onEdit)="isEditForm = false"-->
+<!--&gt;</app-edit-form>-->
+<router-outlet></router-outlet>
 
 

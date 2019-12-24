@@ -1,6 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { RouterModule } from "@angular/router";
 import { AddFormComponent } from "./add-form/add-form.component";
 import { EditFormComponent } from "./edit-form/edit-form.component";
 import { StudFormsComponent } from "./stud-forms.component";
@@ -20,6 +21,7 @@ import { StudFormsComponent } from "./stud-forms.component";
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    RouterModule,
   ]
 })
 export class StudFormsModule { }
