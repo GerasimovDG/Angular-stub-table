@@ -9,12 +9,6 @@ import { Data } from "./data.service";
   providedIn: "root",
 })
 export class DataHandlerService extends Data {
-  // переключатель, с помощью которого срабатывает ChangeDetectionStrategy.onPush
-  // toggleForUpdate: boolean = false;
-  // флаг, отвечающий за открытие формы добавления студента
-  isCallFormService: boolean = false;
-  // флаг, отвечающий за открытие формы редактирования студента
-  // isCallEditFormService: boolean = false;
   student: Student;
 
   getStudents(): Observable<Student[]> {
@@ -45,15 +39,6 @@ export class DataHandlerService extends Data {
   deleteStudent(stud: Student): Observable<Student[]> {
     TestData.students = TestData.students.filter(student => student !== stud);
     return of(TestData.students);
-  }
-
-  openAddForm(): void {
-    this.isCallFormService = true;
-  }
-
-  setEditStudent(stud: Student): void {
-    this.student = stud;
-    // this.isCallEditFormService = true;
   }
 
   editStudent(stud: Student):  Observable<Student[]> {

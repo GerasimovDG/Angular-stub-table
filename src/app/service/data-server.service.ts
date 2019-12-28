@@ -7,7 +7,6 @@ import { Data } from "./data.service";
 @Injectable({providedIn: "root"})
 export class DataServerService extends Data {
 
-  // private lastID: number = 0;
   private url: string = "http://localhost:3000";
 
   constructor(private http: HttpClient) {
@@ -16,24 +15,16 @@ export class DataServerService extends Data {
   }
 
   addStudent(student: Student): Observable<Student> {
-    // this.setLastID(student.id);
     this.lastid = student.id;
     return this.http.post<Student>(this.url + "/items", student);
   }
 
-  // deleteStudent(id: number): Observable<Student[]> {
-  //   return this.http.delete<Student[]>(`http://localhost:3000/items/${id}`);
-  // }
   deleteStudent(stud: Student): Observable<Student[]> {
     return this.http.delete<Student[]>(`http://localhost:3000/items/${stud.id}`);
   }
 
   getStudents(): Observable<Student[]> {
     return this.http.get<Student[]>(this.url + "/items");
-  }
-
-  getStudent(id: number): Observable<Student> {
-    return this.http.get<Student>(`http://localhost:3000/items/${id}`);
   }
 
   editStudent(student: Student): Observable<Student[]> {

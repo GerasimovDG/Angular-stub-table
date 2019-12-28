@@ -13,17 +13,10 @@ enum SearchOption {
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: "./students.component.html",
   styleUrls: ["./students.component.less"],
-  // providers: [ {
-  //   provide: Data,
-  //   useFactory: serviceFactory,
-  //   deps: [ ActivatedRoute, HttpClient],
-  // }]
 })
 
 export class StudentsComponent implements OnInit {
-  // @Input() updateFlag: boolean;
 
-  // students: Student[] = this.dataHandler.getStudents();
   students: Student[] = [];
   feature: boolean = true;
   search: string = "";
@@ -40,22 +33,15 @@ export class StudentsComponent implements OnInit {
   delStudent: Student = new Student();
   hidden: boolean = false;
   private editStudent: Student;
-  // private isEditForm: boolean;
-  // private isAddForm: boolean;
+
 
   loading: boolean = false; // загружается?
-  // debug: boolean = false;
 
   constructor(private cdr: ChangeDetectorRef,
-              // private data: DataMainService,
-              // private dataHandler: DataHandlerService,
-              // private dataServer: DataServerService,
               private router: Router,
               private route: ActivatedRoute,
               private mData: Data,
-              // private http: HttpClient
               ) {
-
   }
 
   detect(): void {
@@ -64,17 +50,7 @@ export class StudentsComponent implements OnInit {
 
   ngOnInit(): void {
     console.log("Init");
-    // this.route.queryParams.subscribe((params: Params) => {
-    //   this.data.debug = !!params.debug;
-    // });
-    // this.students = this.dataHandler.getStudents();
-    // this.data.getStudents(this.data.debug)
-    //   .subscribe( students => {
-    //     console.log(students);
-    //     this.students = students;
-    //     this.loading = false;
-    //     this.detect();
-    //   });
+
     this.mData.getStudents()
       .subscribe( students => {
         console.log(students);
@@ -83,15 +59,6 @@ export class StudentsComponent implements OnInit {
         this.detect();
         this.mData.allStuds = this.students;
       });
-
-    // this.loading = true;
-    // this.dataServer.getStudents()
-    //   .subscribe( students => {
-    //     console.log(students);
-    //     this.students = students;
-    //     this.loading = false;
-    //     this.detect();
-    //   });
   }
 
   toggleFeature(): void {
@@ -133,16 +100,12 @@ export class StudentsComponent implements OnInit {
 
   setStudentsByMark(): void {
     if (!this.mark) {
-      // this.students = this.dataHandler.getStudents();
       this.mData.getStudents()
         .subscribe( (students) => {
           this.students = students;
           this.detect();
         });
     } else {
-      // this.students = this.dataHandler.getStudents().filter( student => {
-      //   return student.averageMark.toString() === this.mark.toString();
-      // });
       this.mData.getStudents()
         .subscribe( (students) => {
           this.students = students.filter( student => {
@@ -154,7 +117,6 @@ export class StudentsComponent implements OnInit {
   }
   setStudentsByBirthday(): void {
     if (!this.birthday) {
-      // this.students = this.dataHandler.getStudents();
       this.mData.getStudents()
         .subscribe( (students) => {
           this.students = students;
@@ -162,15 +124,10 @@ export class StudentsComponent implements OnInit {
         });
     } else {
       const dateBirthday = new Date(this.birthday);
-      // this.students = this.dataHandler.getStudents().filter( student => {
-      //   return student.birthday.getTime() === dateBirthday.getTime();
-      // });
       this.mData.getStudents()
         .subscribe( (students) => {
           this.students = students.filter( student => {
             const birthday = Date.parse( student.birthday.toString());
-            console.log(dateBirthday.getTime().toString());
-            console.log(birthday.toString());
             return birthday.toString() === dateBirthday.getTime().toString();
           });
           this.detect();
@@ -215,28 +172,12 @@ export class StudentsComponent implements OnInit {
 
   // открытие формы редактирования студента
   setEditStudent(student: Student): void {
-    // this.isEditForm = true;
-    // this.dataHandler.setEditStudent(student);
     this.editStudent = student;
-    // if (this.data.debug) {
-    //   this.router.navigate( ["/form/edit", student.id], {queryParams: {debug: true}});
-    // } else {
-    //   console.log(student);
-    //   this.router.navigate(["/form/edit", student.id]);
-    // }
-    console.log(student.id);
     this.router.navigate(["/form", "edit", student.id]);
   }
-  //
+
   // открытие формы добавления студента
   openAddForm(): void {
-    // if (this.data.debug) {
-    //   this.router.navigate(["/form/add"], {queryParams: {debug: true}});
-    // } else {
-    //   this.router.navigate(["/form/add"]);
-    // }
     this.router.navigate(["/form", "add"]);
-    // this.dataHandler.openAddForm();
-    // this.isAddForm = true;
   }
 }

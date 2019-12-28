@@ -1,8 +1,6 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Student } from "../../../../model/students";
-import { DataHandlerService } from "../../../../service/data-handler.service";
-import { DataServerService } from "../../../../service/data-server.service";
 import { Data } from "../../../../service/data.service";
 import { StudFormsComponent } from "../stud-forms.component";
 
@@ -16,23 +14,26 @@ export class EditFormComponent extends StudFormsComponent implements OnInit {
 
   editStudent: Student;
 
-  @Output() onEdit: EventEmitter<boolean> = new EventEmitter<boolean>();
+  // @Output() onEdit: EventEmitter<boolean> = new EventEmitter<boolean>();
   private isCallEditForm: boolean;
 
-  constructor(protected dataHandler: DataHandlerService,
-              protected dataServer: DataServerService,
-              protected mData: Data,
+  constructor(protected mData: Data,
               protected route: ActivatedRoute,
               protected router: Router) {
-    super(dataHandler, dataServer, mData, route, router);
+    super(mData, route, router);
   }
 
   ngOnInit(): void {
     super.ngOnInit();
 
     const id = this.route.snapshot.params.id;
-    this.editStudent = this.mData.allStuds.find(student => student.id.toString() === id);
-    this.setEditStudent(this.editStudent);
+    console.dir(id);
+    this.mData.getStudents().subscribe( (students) => {
+      this.editStudent = students.find(student => student.id.toString() === id.toString());
+      console.dir(this.editStudent);
+      this.setEditStudent(this.editStudent);
+    });
+
   }
 
   formatDate(date: Date): string {
@@ -58,12 +59,6 @@ export class EditFormComponent extends StudFormsComponent implements OnInit {
 
   closeEditForm(): void {
     this.isCallEditForm = false;
-    // this.onEdit.emit(this.isCallEditForm);
-    // if (this.data.debug) {
-    //   this.router.navigate([""], {queryParams: {debug: true}});
-    // } else {
-    //   this.router.navigate([""]);
-    // }
     this.router.navigate([""]);
   }
 
@@ -71,36 +66,12 @@ export class EditFormComponent extends StudFormsComponent implements OnInit {
     if (this.form.valid) {
       super.submitStudent();
       this.newStudent.id = this.editStudent.id;
-      // this.newStudent.id = this.dataHandler.student.id;
-      // this.dataHandler.editStudent(this.newStudent);
-      // this.data.editStudent(this.data.debug, this.newStudent)
-      //   .subscribe( students => {
-      //     console.log(students);
-      //     if (this.data.debug) {
-      //       this.router.navigate([""], {queryParams: {debug: true}});
-      //     } else {
-      //       this.router.navigate([""]);
-      //     }
-      //   });
+
       this.mData.editStudent(this.newStudent)
         .subscribe( students => {
           console.log(students);
-          // if (this.data.debug) {
-          //   this.router.navigate([""], {queryParams: {debug: true}});
-          // } else {
-          //   this.router.navigate([""]);
-          // }
           this.router.navigate([""]);
         });
-      // this.dataHandler.isCallEditFormService = false;
-      // this.dataHandler.toggleForUpdate = !this.dataHandler.toggleForUpdate;
-      // this.isCallEditForm = false;
-      // this.onEdit.emit(this.isCallEditForm);
-      // if (this.data.debug) {
-      //   this.router.navigate([""], {queryParams: {debug: true}});
-      // } else {
-      //   this.router.navigate([""]);
-      // }
     }
   }
 }
