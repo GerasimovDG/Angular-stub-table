@@ -15,7 +15,6 @@ export class StudFormsComponent implements OnInit {
 
   protected form: FormGroup;
   protected newStudent: Student;
-  // protected debug: boolean;
 
   constructor(protected mData: Data,
               protected route: ActivatedRoute,
@@ -44,7 +43,7 @@ export class StudFormsComponent implements OnInit {
 
 
       this.newStudent = new Student(
-        this.mData.lastid + 1,
+        this.mData.lastId + 1,
         data.fio.lastName,
         data.fio.firstName,
         data.fio.middleName,

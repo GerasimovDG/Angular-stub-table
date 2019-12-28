@@ -15,12 +15,12 @@ export class DataServerService extends Data {
   }
 
   addStudent(student: Student): Observable<Student> {
-    this.lastid = student.id;
+    this.lastId = student.id;
     return this.http.post<Student>(this.url + "/items", student);
   }
 
   deleteStudent(stud: Student): Observable<Student[]> {
-    return this.http.delete<Student[]>(`http://localhost:3000/items/${stud.id}`);
+    return this.http.delete<Student[]>(`${this.url}/items/${stud.id}`);
   }
 
   getStudents(): Observable<Student[]> {
@@ -28,14 +28,14 @@ export class DataServerService extends Data {
   }
 
   editStudent(student: Student): Observable<Student[]> {
-     return this.http.put<Student[]>(`http://localhost:3000/items/${student.id}`, student);
+     return this.http.put<Student[]>(`${this.url}/items/${student.id}`, student);
   }
 
-  set lastid(id: number) {
+  set lastId(id: number) {
     this.lastID = id;
   }
 
-  get lastid(): number {
+  get lastId(): number {
     return this.lastID;
   }
 }

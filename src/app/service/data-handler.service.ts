@@ -15,11 +15,11 @@ export class DataHandlerService extends Data {
     return of(TestData.students);
   }
 
-  set lastid(id: number) {
+  set lastId(id: number) {
     this.lastID = id;
   }
 
-  get lastid(): number {
+  get lastId(): number {
     let maxId: number = 0;
     TestData.students.forEach( student => {
       if (student.id > maxId) {
@@ -31,8 +31,7 @@ export class DataHandlerService extends Data {
 
   addStudent(student: Student):  Observable<Student> {
     TestData.students.push(student);
-    // this.setLastID(student.id);
-    this.lastid = student.id;
+    this.lastId = student.id;
     return of(student);
   }
 

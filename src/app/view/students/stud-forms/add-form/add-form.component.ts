@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { StudFormsComponent } from "../stud-forms.component";
 
 @Component({
@@ -9,9 +9,6 @@ import { StudFormsComponent } from "../stud-forms.component";
 })
 export class AddFormComponent extends StudFormsComponent implements OnInit {
 
-  @Output() onCloseForm: EventEmitter<boolean> = new EventEmitter<boolean>();
-  private isCallAddForm: boolean;
-
   ngOnInit(): void {
     super.ngOnInit();
   }
@@ -20,8 +17,8 @@ export class AddFormComponent extends StudFormsComponent implements OnInit {
     if (this.form.valid) {
       super.submitStudent();
       this.mData.addStudent(this.newStudent)
-        .subscribe( stud => {
-          console.dir(stud);
+        .subscribe( student => {
+          console.dir(student);
           this.form.reset();
           this.closeAddForm();
         });
@@ -29,7 +26,6 @@ export class AddFormComponent extends StudFormsComponent implements OnInit {
   }
 
   closeAddForm(): void {
-    this.isCallAddForm = false;
     this.router.navigate([""]);
   }
 }

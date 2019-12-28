@@ -17,7 +17,9 @@ enum SearchOption {
 
 export class StudentsComponent implements OnInit {
 
-  students: Student[] = [];
+  private editStudent: Student;
+
+  private students: Student[] = [];
   feature: boolean = true;
   search: string = "";
   lastNameSearch: string = "";
@@ -32,8 +34,6 @@ export class StudentsComponent implements OnInit {
 
   delStudent: Student = new Student();
   hidden: boolean = false;
-  private editStudent: Student;
-
 
   loading: boolean = false; // загружается?
 

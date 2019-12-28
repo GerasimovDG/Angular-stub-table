@@ -13,7 +13,7 @@ export abstract class Data {
   abstract deleteStudent(id: number | Student): Observable<Student[]>;
   abstract editStudent(student: Student): Observable<Student[]>;
 
-  abstract get lastid(): number;
-  abstract set lastid(id: number);
+  abstract get lastId(): number;
+  abstract set lastId(id: number);
 
 }

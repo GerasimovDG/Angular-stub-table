@@ -14,9 +14,6 @@ export class EditFormComponent extends StudFormsComponent implements OnInit {
 
   editStudent: Student;
 
-  // @Output() onEdit: EventEmitter<boolean> = new EventEmitter<boolean>();
-  private isCallEditForm: boolean;
-
   constructor(protected mData: Data,
               protected route: ActivatedRoute,
               protected router: Router) {
@@ -37,7 +34,6 @@ export class EditFormComponent extends StudFormsComponent implements OnInit {
   }
 
   formatDate(date: Date): string {
-    console.log(typeof date);
     const year = date.getFullYear();
     let MM: string = (date.getMonth() + 1) + "";
     let dd: string = "" + date.getDate();
@@ -49,16 +45,14 @@ export class EditFormComponent extends StudFormsComponent implements OnInit {
     }
     return [year, MM, dd].join("-");
   }
-  //
+
   setEditStudent(student: Student): void {
-    console.dir(student);
     this.form.patchValue({fio: student});
     this.form.patchValue({birthday: this.formatDate(new Date(student.birthday)) });
     this.form.patchValue({mark: student.averageMark});
   }
 
   closeEditForm(): void {
-    this.isCallEditForm = false;
     this.router.navigate([""]);
   }
 
@@ -68,8 +62,7 @@ export class EditFormComponent extends StudFormsComponent implements OnInit {
       this.newStudent.id = this.editStudent.id;
 
       this.mData.editStudent(this.newStudent)
-        .subscribe( students => {
-          console.log(students);
+        .subscribe( () => {
           this.router.navigate([""]);
         });
     }

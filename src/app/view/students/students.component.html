@@ -88,8 +88,10 @@
   <div id="confirm" class="confirm">
     <h2>Вы уверены, что хотите удалить студента?</h2>
     <h3>{{delStudent.lastName || ""}} {{delStudent.firstName || ""}} {{delStudent.middleName || ""}}</h3>
-    <button class="confirm__button" (click)=" hidden = false; deleteStudent(delStudent)">Удалить</button>
-    <button class="confirm__button confirm__button_cancel" (click)="hidden = false">Отмена</button>
+    <div class="button-block">
+    <button class="confirm__button button-block__button" (click)=" hidden = false; deleteStudent(delStudent)">Удалить</button>
+    <button class="confirm__button confirm__button_cancel button-block__button" (click)="hidden = false">Отмена</button>
+    </div>
   </div>
 </div>
 
