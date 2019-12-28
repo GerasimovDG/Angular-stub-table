@@ -13,7 +13,6 @@ const routes: Routes = [
       { path: "add", component: AddFormComponent},
       { path: "edit", component: EditFormComponent,  redirectTo: "", pathMatch: "full"},
       { path: "edit/:id", component: EditFormComponent, canActivate: [EditGuard] },
-
     ]},
   { path: "**", component: PageNotFoundComponent },
 ];

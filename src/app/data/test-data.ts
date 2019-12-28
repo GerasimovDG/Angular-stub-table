@@ -5,10 +5,10 @@ export class TestData {
   static students: Student[] = [
     {
       id: 1,
-      lastName: "Герасимов",
-      firstName: "Дмитрий",
-      middleName: "Геннадьевич",
-      birthday: new Date("1998-04-24"),
+      lastName: "Герасимова",
+      firstName: "Татьяна",
+      middleName: "Васильевна",
+      birthday: new Date("1997-09-17"),
       averageMark: 4.4,
       info: {
         address: "987654, г. Нижний Новгород, пр-т Гагарина 23, дом 999, квартира 999",

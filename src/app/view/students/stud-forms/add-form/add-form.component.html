@@ -2,7 +2,7 @@
   <div class="container">
     <form novalidate class="form" [formGroup]="form" (ngSubmit)="submitStudent()">
 <!--      <div (click)="this.dataHandler.isCallFormService=false" class="close">&times;</div>-->
-      <div (click)="closeAddForm()" [routerLink]="['/']" class="close">&times;</div>
+      <div (click)="closeAddForm()" class="close">&times;</div>
       <h1>Добавление студента</h1>
 
       <div class="form" formGroupName="fio">

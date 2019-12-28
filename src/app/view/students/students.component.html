@@ -1,6 +1,6 @@
 <div class="view">
   <div class="view-header">
-    <h4 class="view-header__title">Список студентов</h4>
+    <h4 class="view-header__title" [routerLink]="'/'" [queryParams]="{debug: true}" >Список студентов</h4>
     <label class="view-header__checkbox">
       <input (click)="toggleFeature()" type="checkbox" checked="checked" />
       <span class="view-header__checkbox__text">Выделение двоечников</span>
@@ -35,7 +35,7 @@
     </div>
   </div>
   <div class="view-body table-responsive">
-    <table class="table" >
+    <table class="table" *ngIf="!loading; else loadingBlock" >
       <thead class=" table-header">
       <tr>
       <th (click)="sortTableBy('id'); sortUp = !sortUp">#</th>
@@ -48,36 +48,39 @@
       <th></th>
       </tr>
       </thead>
-      <tbody [appInfo]="student.info"
-             [appHighlight]="student.averageMark"
-             *ngFor="let student of students | filter:lastNameSearch; trackBy:trackByStudentID; let i = index" class="table-body"
-             [ngClass]="{
-                'table-body_red' : student.averageMark < 3 && getFeature(),
-                'table-body_green' : isSearch(student)
-              }"
-            >
-      <tr>
-        <td>{{i + 1}}</td>
-        <td class="table-body__element">{{student.lastName}}</td>
-        <td class="table-body__element">{{student.firstName}}</td>
-        <td class="table-body__element">{{student.middleName}}</td>
-        <td> {{student.birthday | date:"dd.MM.yyyy" | dateYears}}</td>
-        <td>{{student.averageMark }}
-        <span class="gift" [innerHTML] = "student.averageMark | goodMark"></span>
-        </td>
-        <td>
-          <div class="edit" (click)="setEditStudent(student)" >
-            <i class="fas fa-edit"></i>
-          </div>
-        </td>
-        <td>
-          <div class="delete" (click)="hidden=true; delStudent=student" >
-            <button class="delete__button"></button>
-          </div>
-        </td>
-      </tr>
-      </tbody>
+        <tbody [appInfo]="student.info"
+               [appHighlight]="student.averageMark"
+               *ngFor="let student of students | filter:lastNameSearch; trackBy:trackByStudentID; let i = index" class="table-body"
+               [ngClass]="{
+                  'table-body_red' : student.averageMark < 3 && getFeature(),
+                  'table-body_green' : isSearch(student)
+                }"
+              >
+        <tr>
+          <td>{{i + 1}}</td>
+          <td class="table-body__element">{{student.lastName}}</td>
+          <td class="table-body__element">{{student.firstName}}</td>
+          <td class="table-body__element">{{student.middleName || ""}}</td>
+          <td> {{student.birthday | date:"dd.MM.yyyy" | dateYears}}</td>
+          <td>{{student.averageMark }}
+          <span class="gift" [innerHTML] = "student.averageMark | goodMark"></span>
+          </td>
+          <td>
+            <div class="edit" (click)="setEditStudent(student)" >
+              <i class="fas fa-edit"></i>
+            </div>
+          </td>
+          <td>
+            <div class="delete" (click)="hidden=true; delStudent=student" >
+              <button class="delete__button"></button>
+            </div>
+          </td>
+        </tr>
+        </tbody>
     </table>
+    <ng-template #loadingBlock>
+      Загрузка...
+    </ng-template>
   </div>
 </div>
 
@@ -85,7 +88,7 @@
   <div id="confirm" class="confirm">
     <h2>Вы уверены, что хотите удалить студента?</h2>
     <h3>{{delStudent.lastName || ""}} {{delStudent.firstName || ""}} {{delStudent.middleName || ""}}</h3>
-    <button class="confirm__button" (click)="deleteStudent(delStudent); hidden = false">Удалить</button>
+    <button class="confirm__button" (click)=" hidden = false; deleteStudent(delStudent)">Удалить</button>
     <button class="confirm__button confirm__button_cancel" (click)="hidden = false">Отмена</button>
   </div>
 </div>

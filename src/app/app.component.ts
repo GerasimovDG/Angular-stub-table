@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
-import { DataHandlerService } from "./service/data-handler.service";
 
 @Component({
   selector: "app-root",
@@ -9,6 +8,4 @@ import { DataHandlerService } from "./service/data-handler.service";
 })
 export class AppComponent {
   title = "stud-table";
-
-  constructor(private dataHandler: DataHandlerService) {}
 }

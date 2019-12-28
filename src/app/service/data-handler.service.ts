@@ -1,12 +1,14 @@
 import { Injectable } from "@angular/core";
+import { Observable, of } from "rxjs";
 import { TestData } from "../data/test-data";
 import { Student } from "../model/students";
+import { Data } from "./data.service";
 
 
 @Injectable({
   providedIn: "root",
 })
-export class DataHandlerService {
+export class DataHandlerService extends Data {
   // переключатель, с помощью которого срабатывает ChangeDetectionStrategy.onPush
   // toggleForUpdate: boolean = false;
   // флаг, отвечающий за открытие формы добавления студента
@@ -15,20 +17,34 @@ export class DataHandlerService {
   // isCallEditFormService: boolean = false;
   student: Student;
 
-  getStudents(): Student[] {
-    return TestData.students;
+  getStudents(): Observable<Student[]> {
+    return of(TestData.students);
   }
 
-  getLastID(): number {
-    return TestData.students[TestData.students.length - 1].id;
+  set lastid(id: number) {
+    this.lastID = id;
   }
 
-  addStudent(student: Student): void {
+  get lastid(): number {
+    let maxId: number = 0;
+    TestData.students.forEach( student => {
+      if (student.id > maxId) {
+        maxId = student.id;
+      }
+    });
+    return maxId;
+  }
+
+  addStudent(student: Student):  Observable<Student> {
     TestData.students.push(student);
+    // this.setLastID(student.id);
+    this.lastid = student.id;
+    return of(student);
   }
 
-  deleteStudent(stud: Student): void {
+  deleteStudent(stud: Student): Observable<Student[]> {
     TestData.students = TestData.students.filter(student => student !== stud);
+    return of(TestData.students);
   }
 
   openAddForm(): void {
@@ -40,7 +56,7 @@ export class DataHandlerService {
     // this.isCallEditFormService = true;
   }
 
-  editStudent(stud: Student): void {
+  editStudent(stud: Student):  Observable<Student[]> {
     const find = TestData.students.find( student => {
        return student.id === stud.id;
     });
@@ -49,5 +65,6 @@ export class DataHandlerService {
     find.middleName = stud.middleName;
     find.birthday = stud.birthday;
     find.averageMark = stud.averageMark;
+    return of(TestData.students);
   }
 }

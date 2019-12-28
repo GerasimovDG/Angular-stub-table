@@ -1,8 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Student } from "../../../model/students";
 import { DataHandlerService } from "../../../service/data-handler.service";
+import { DataServerService } from "../../../service/data-server.service";
+import { Data } from "../../../service/data.service";
 import { MyValidators } from "../../my.validators";
 
 @Component({
@@ -15,12 +17,19 @@ export class StudFormsComponent implements OnInit {
 
   protected form: FormGroup;
   protected newStudent: Student;
+  // protected debug: boolean;
 
   constructor(protected dataHandler: DataHandlerService,
+              protected dataServer: DataServerService,
+              protected mData: Data,
               protected route: ActivatedRoute,
+              protected router: Router,
   ) {}
 
   ngOnInit(): void {
+    // this.route.queryParams.subscribe((params: Params) => {
+    //   this.data.debug = !!params.debug;
+    // });
     this.form = new FormGroup( {
       fio: new FormGroup( {
         lastName: new FormControl("", [Validators.required]),
@@ -40,8 +49,12 @@ export class StudFormsComponent implements OnInit {
       const value = data.mark.toString().split("");
       data.mark = +value.filter( el => el !== "," && el !== "." ).join(".");
 
+
       this.newStudent = new Student(
-        this.dataHandler.getLastID() + 1,
+        // this.dataServer.getLastID() + 1,
+         // this.data.getLastID(this.data.debug) + 1,
+        // this.mData.getLastID() + 1,
+        this.mData.lastid + 1,
         data.fio.lastName,
         data.fio.firstName,
         data.fio.middleName,
