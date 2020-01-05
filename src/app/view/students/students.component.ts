@@ -17,8 +17,6 @@ enum SearchOption {
 
 export class StudentsComponent implements OnInit {
 
-  private editStudent: Student;
-
   private students: Student[] = [];
   feature: boolean = true;
   search: string = "";
@@ -49,16 +47,20 @@ export class StudentsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("Init");
 
-    this.mData.getStudents()
-      .subscribe( students => {
-        console.log(students);
-        this.students = students;
-        this.loading = false;
-        this.detect();
-        this.mData.allStuds = this.students;
-      });
+    if (!this.mData.onInit) {
+      this.mData.getStudents()
+        .subscribe( students => {
+          this.students = students;
+          this.loading = false;
+          this.mData.allStuds = this.students;
+          this.mData.lastId = students[students.length - 1].id;
+          this.mData.onInit = true;
+          this.detect();
+        });
+    }
+
+    this.students = this.mData.getHardStudents();
   }
 
   toggleFeature(): void {
@@ -100,38 +102,22 @@ export class StudentsComponent implements OnInit {
 
   setStudentsByMark(): void {
     if (!this.mark) {
-      this.mData.getStudents()
-        .subscribe( (students) => {
-          this.students = students;
-          this.detect();
-        });
+      this.students = this.mData.getHardStudents();
     } else {
-      this.mData.getStudents()
-        .subscribe( (students) => {
-          this.students = students.filter( student => {
-            return student.averageMark.toString() === this.mark.toString();
-          });
-          this.detect();
-        });
+      this.students = this.mData.getHardStudents().filter( student => {
+        return student.averageMark.toString() === this.mark.toString();
+      });
     }
   }
   setStudentsByBirthday(): void {
     if (!this.birthday) {
-      this.mData.getStudents()
-        .subscribe( (students) => {
-          this.students = students;
-          this.detect();
-        });
+      this.students = this.mData.getHardStudents();
     } else {
       const dateBirthday = new Date(this.birthday);
-      this.mData.getStudents()
-        .subscribe( (students) => {
-          this.students = students.filter( student => {
-            const birthday = Date.parse( student.birthday.toString());
-            return birthday.toString() === dateBirthday.getTime().toString();
-          });
-          this.detect();
-        });
+      this.students = this.mData.getHardStudents().filter( student => {
+        const birthday = Date.parse( student.birthday.toString());
+        return birthday.toString() === dateBirthday.getTime().toString();
+      });
     }
   }
 
@@ -155,24 +141,20 @@ export class StudentsComponent implements OnInit {
   deleteStudent(stud: Student): void {
     if (stud) {
       this.mData.deleteStudent(stud)
-        .subscribe( students => {
-          this.students = students;
+        .subscribe( () => {
+          this.mData.allStuds = this.mData.allStuds.filter(student => student !== stud);
+          this.students = this.mData.getHardStudents();
           this.detect();
         });
     }
   }
 
   isSort(name: string): boolean {
-    if (this.sort === name) {
-      console.log((this.sort));
-      return true;
-    }
-    return false;
+    return this.sort === name;
   }
 
   // открытие формы редактирования студента
   setEditStudent(student: Student): void {
-    this.editStudent = student;
     this.router.navigate(["/form", "edit", student.id]);
   }
 

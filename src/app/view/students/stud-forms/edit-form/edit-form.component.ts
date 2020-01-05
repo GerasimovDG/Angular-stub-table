@@ -22,15 +22,17 @@ export class EditFormComponent extends StudFormsComponent implements OnInit {
 
   ngOnInit(): void {
     super.ngOnInit();
-
     const id = this.route.snapshot.params.id;
-    console.dir(id);
-    this.mData.getStudents().subscribe( (students) => {
-      this.editStudent = students.find(student => student.id.toString() === id.toString());
-      console.dir(this.editStudent);
-      this.setEditStudent(this.editStudent);
-    });
 
+    if (!this.mData.getHardStudents()) {
+      this.mData.getStudents().subscribe( (students) => {
+        this.editStudent = students.find(student => student.id.toString() === id.toString());
+        this.setEditStudent(this.editStudent);
+      });
+    } else {
+      this.editStudent = this.mData.getHardStudents().find(student => student.id.toString() === id.toString());
+      this.setEditStudent(this.editStudent);
+    }
   }
 
   formatDate(date: Date): string {
@@ -63,6 +65,16 @@ export class EditFormComponent extends StudFormsComponent implements OnInit {
 
       this.mData.editStudent(this.newStudent)
         .subscribe( () => {
+          // const find = this.mData.allStuds.find( student => {
+          const find = this.mData.getHardStudents().find( student => {
+            return student.id === this.editStudent.id;
+          });
+          find.lastName = this.newStudent.lastName;
+          find.firstName = this.newStudent.firstName;
+          find.middleName = this.newStudent.middleName;
+          find.birthday = this.newStudent.birthday;
+          find.averageMark = this.newStudent.averageMark;
+
           this.router.navigate([""]);
         });
     }

@@ -37,10 +37,8 @@ export class StudFormsComponent implements OnInit {
   submitStudent(): void {
     if (this.form.valid) {
       const data = {...this.form.value};
-
       const value = data.mark.toString().split("");
       data.mark = +value.filter( el => el !== "," && el !== "." ).join(".");
-
 
       this.newStudent = new Student(
         this.mData.lastId + 1,

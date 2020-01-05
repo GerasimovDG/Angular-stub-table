@@ -17,8 +17,7 @@ export class AddFormComponent extends StudFormsComponent implements OnInit {
     if (this.form.valid) {
       super.submitStudent();
       this.mData.addStudent(this.newStudent)
-        .subscribe( student => {
-          console.dir(student);
+        .subscribe( () => {
           this.form.reset();
           this.closeAddForm();
         });

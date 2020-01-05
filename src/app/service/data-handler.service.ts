@@ -15,6 +15,10 @@ export class DataHandlerService extends Data {
     return of(TestData.students);
   }
 
+  getHardStudents(): Student[] {
+    return TestData.students;
+  }
+
   set lastId(id: number) {
     this.lastID = id;
   }
@@ -32,6 +36,7 @@ export class DataHandlerService extends Data {
   addStudent(student: Student):  Observable<Student> {
     TestData.students.push(student);
     this.lastId = student.id;
+    console.log(this.lastId);
     return of(student);
   }
 
