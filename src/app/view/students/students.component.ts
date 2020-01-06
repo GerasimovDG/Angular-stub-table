@@ -57,6 +57,16 @@ export class StudentsComponent implements OnInit {
           this.mData.lastId = students[students.length - 1].id;
           this.mData.onInit = true;
           this.detect();
+        }, error => {
+          if (error.status >= 500) {
+            this.router.navigate(["serverError"], {
+              queryParams: {
+                status: error.status,
+                statusText: error.statusText,
+                url: error.url,
+              }
+            });
+          }
         });
     }
 

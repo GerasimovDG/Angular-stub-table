@@ -1,0 +1,26 @@
+<div>
+  <div class="container">
+    <div class="error">
+      <div class="error__header">
+        <img class="error__img" src="assets/img/404.svg" alt="500" width="100">
+        <div class="error__code"> {{status}}</div>
+      </div>
+
+      <div class="error__text">Ошибка сервера</div>
+      <div class="error__info">
+        На сервере произошла непредвиденная ошибка. Пожалуйста, подождите. Она вскоре будет исправлена.
+        <br>
+        <div class="error__link">
+          Попробуйте
+          <a [routerLink]="['/']">вернуться на главную</a>.
+        </div>
+      </div>
+    </div>
+    <div class="error__details">
+      <div>HTTP Error {{status}} ({{statusText}})</div>
+      <div>При попытке заполнить запрос на {{url}} произошла непредвиденная ошибка.</div>
+    </div>
+  </div>
+
+
+</div>
