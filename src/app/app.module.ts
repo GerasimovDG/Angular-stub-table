@@ -6,7 +6,7 @@ import { ActivatedRoute } from "@angular/router";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { Error500PageComponent } from "./error-pages/error500-page/error500-page.component";
-import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
+import { PageNotFoundComponent } from "./error-pages/page-not-found/page-not-found.component";
 import { DataHandlerService } from "./service/data-handler.service";
 import { DataServerService } from "./service/data-server.service";
 import { serviceFactory } from "./service/data.factory";

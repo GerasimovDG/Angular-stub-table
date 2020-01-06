@@ -3,7 +3,7 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { EditGuard } from "./edit.guard";
 import { Error500PageComponent } from "./error-pages/error500-page/error500-page.component";
-import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
+import { PageNotFoundComponent } from "./error-pages/page-not-found/page-not-found.component";
 import { AddFormComponent } from "./view/students/stud-forms/add-form/add-form.component";
 import { EditFormComponent } from "./view/students/stud-forms/edit-form/edit-form.component";
 import { StudentsComponent } from "./view/students/students.component";
