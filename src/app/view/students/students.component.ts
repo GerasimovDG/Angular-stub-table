@@ -155,7 +155,17 @@ export class StudentsComponent implements OnInit {
           this.mData.allStuds = this.mData.allStuds.filter(student => student !== stud);
           this.students = this.mData.getHardStudents();
           this.detect();
-        });
+        }, error => {
+        if (error.status >= 500) {
+          this.router.navigate(["serverError"], {
+            queryParams: {
+              status: error.status,
+              statusText: error.statusText,
+              url: error.url,
+            }
+          });
+        }
+      });
     }
   }
 
