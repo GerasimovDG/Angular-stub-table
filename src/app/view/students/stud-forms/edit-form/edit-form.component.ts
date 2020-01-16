@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
+import { Subscription } from "rxjs";
 import { Student } from "../../../../model/students";
 import { Data } from "../../../../service/data.service";
 import { StudFormsComponent } from "../stud-forms.component";
@@ -10,9 +11,12 @@ import { StudFormsComponent } from "../stud-forms.component";
   templateUrl: "./edit-form.component.html",
   styleUrls: ["./edit-form.component.less"]
 })
-export class EditFormComponent extends StudFormsComponent implements OnInit {
+export class EditFormComponent extends StudFormsComponent implements OnInit, OnDestroy {
 
   editStudent: Student;
+  private students$: Subscription;
+  private editStudent$: Subscription;
+
 
   constructor(protected mData: Data,
               protected route: ActivatedRoute,
@@ -25,7 +29,7 @@ export class EditFormComponent extends StudFormsComponent implements OnInit {
     const id = this.route.snapshot.params.id;
 
     if (!this.mData.getHardStudents()) {
-      this.mData.getStudents().subscribe( (students) => {
+      this.students$ = this.mData.getStudents().subscribe((students) => {
         this.editStudent = students.find(student => student.id.toString() === id.toString());
         this.setEditStudent(this.editStudent);
       });
@@ -50,7 +54,7 @@ export class EditFormComponent extends StudFormsComponent implements OnInit {
 
   setEditStudent(student: Student): void {
     this.form.patchValue({fio: student});
-    this.form.patchValue({birthday: this.formatDate(new Date(student.birthday)) });
+    this.form.patchValue({birthday: this.formatDate(new Date(student.birthday))});
     this.form.patchValue({mark: student.averageMark});
   }
 
@@ -62,11 +66,12 @@ export class EditFormComponent extends StudFormsComponent implements OnInit {
     if (this.form.valid) {
       super.submitStudent();
       this.newStudent.id = this.editStudent.id;
+      this.enableBtn = false;
 
-      this.mData.editStudent(this.newStudent)
-        .subscribe( () => {
+      this.editStudent$ = this.mData.editStudent(this.newStudent)
+        .subscribe(() => {
           // const find = this.mData.allStuds.find( student => {
-          const find = this.mData.getHardStudents().find( student => {
+          const find = this.mData.getHardStudents().find(student => {
             return student.id === this.editStudent.id;
           });
           find.lastName = this.newStudent.lastName;
@@ -77,6 +82,15 @@ export class EditFormComponent extends StudFormsComponent implements OnInit {
 
           this.router.navigate([""]);
         });
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.students$) {
+      this.students$.unsubscribe();
+    }
+    if (this.editStudent$) {
+      this.editStudent$.unsubscribe();
     }
   }
 }

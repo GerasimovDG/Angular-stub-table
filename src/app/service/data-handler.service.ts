@@ -25,7 +25,7 @@ export class DataHandlerService extends Data {
 
   get lastId(): number {
     let maxId: number = 0;
-    TestData.students.forEach( student => {
+    TestData.students.forEach(student => {
       if (student.id > maxId) {
         maxId = student.id;
       }
@@ -33,21 +33,26 @@ export class DataHandlerService extends Data {
     return maxId;
   }
 
-  addStudent(student: Student):  Observable<Student> {
-    TestData.students.push(student);
+  pushOnHard(student: Student): void {
     this.lastId = student.id;
-    console.log(this.lastId);
+    TestData.students.push(student);
+  }
+
+  addStudent(student: Student): Observable<Student> {
+    // TestData.students.push(student);
+    // this.lastId = student.id;
     return of(student);
   }
+
 
   deleteStudent(stud: Student): Observable<Student[]> {
     TestData.students = TestData.students.filter(student => student !== stud);
     return of(TestData.students);
   }
 
-  editStudent(stud: Student):  Observable<Student[]> {
-    const find = TestData.students.find( student => {
-       return student.id === stud.id;
+  editStudent(stud: Student): Observable<Student[]> {
+    const find = TestData.students.find(student => {
+      return student.id === stud.id;
     });
     find.lastName = stud.lastName;
     find.firstName = stud.firstName;

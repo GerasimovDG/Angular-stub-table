@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
+import { Subscription } from "rxjs";
 import { Student } from "../../model/students";
 import { Data } from "../../service/data.service";
 
@@ -8,6 +9,7 @@ enum SearchOption {
   LastName,
   FirstName,
 }
+
 @Component({
   selector: "app-students",
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -15,9 +17,11 @@ enum SearchOption {
   styleUrls: ["./students.component.less"],
 })
 
-export class StudentsComponent implements OnInit {
+export class StudentsComponent implements OnInit, OnDestroy {
 
   private students: Student[] = [];
+  private students$: Subscription;
+  private deleteStudent$: Subscription;
   feature: boolean = true;
   search: string = "";
   lastNameSearch: string = "";
@@ -39,7 +43,7 @@ export class StudentsComponent implements OnInit {
               private router: Router,
               private route: ActivatedRoute,
               private mData: Data,
-              ) {
+  ) {
   }
 
   detect(): void {
@@ -49,8 +53,9 @@ export class StudentsComponent implements OnInit {
   ngOnInit(): void {
 
     if (!this.mData.onInit) {
-      this.mData.getStudents()
-        .subscribe( students => {
+      this.loading = true;
+      this.students$ = this.mData.getStudents()
+        .subscribe(students => {
           this.students = students;
           this.loading = false;
           this.mData.allStuds = this.students;
@@ -92,7 +97,7 @@ export class StudentsComponent implements OnInit {
     switch (this.searchField) {
       case SearchOption.All:
         if (student.lastName.toLocaleLowerCase().includes(this.search.toLowerCase()) ||
-        student.firstName.toLocaleLowerCase().includes(this.search.toLowerCase())) {
+          student.firstName.toLocaleLowerCase().includes(this.search.toLowerCase())) {
           return true;
         }
         break;
@@ -114,18 +119,19 @@ export class StudentsComponent implements OnInit {
     if (!this.mark) {
       this.students = this.mData.getHardStudents();
     } else {
-      this.students = this.mData.getHardStudents().filter( student => {
+      this.students = this.mData.getHardStudents().filter(student => {
         return student.averageMark.toString() === this.mark.toString();
       });
     }
   }
+
   setStudentsByBirthday(): void {
     if (!this.birthday) {
       this.students = this.mData.getHardStudents();
     } else {
       const dateBirthday = new Date(this.birthday);
-      this.students = this.mData.getHardStudents().filter( student => {
-        const birthday = Date.parse( student.birthday.toString());
+      this.students = this.mData.getHardStudents().filter(student => {
+        const birthday = Date.parse(student.birthday.toString());
         return birthday.toString() === dateBirthday.getTime().toString();
       });
     }
@@ -150,22 +156,23 @@ export class StudentsComponent implements OnInit {
   // удаление студента
   deleteStudent(stud: Student): void {
     if (stud) {
-      this.mData.deleteStudent(stud)
-        .subscribe( () => {
+      this.deleteStudent$ = this.mData.deleteStudent(stud)
+        .subscribe(() => {
           this.mData.allStuds = this.mData.allStuds.filter(student => student !== stud);
           this.students = this.mData.getHardStudents();
+          this.hidden = false;
           this.detect();
         }, error => {
-        if (error.status >= 500) {
-          this.router.navigate(["serverError"], {
-            queryParams: {
-              status: error.status,
-              statusText: error.statusText,
-              url: error.url,
-            }
-          });
-        }
-      });
+          if (error.status >= 500) {
+            this.router.navigate(["serverError"], {
+              queryParams: {
+                status: error.status,
+                statusText: error.statusText,
+                url: error.url,
+              }
+            });
+          }
+        });
     }
   }
 
@@ -181,5 +188,14 @@ export class StudentsComponent implements OnInit {
   // открытие формы добавления студента
   openAddForm(): void {
     this.router.navigate(["/form", "add"]);
+  }
+
+  ngOnDestroy(): void {
+    if (this.students$) {
+      this.students$.unsubscribe();
+    }
+    if (this.deleteStudent$) {
+      this.deleteStudent$.unsubscribe();
+    }
   }
 }

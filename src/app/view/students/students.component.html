@@ -79,7 +79,10 @@
         </tbody>
     </table>
     <ng-template #loadingBlock>
-      Загрузка...
+        <div class="loading">
+            <div class="loading__text">Загрузка...</div>
+            <div class="lds-ring loading__elem"><div></div><div></div><div></div><div></div></div>
+        </div>
     </ng-template>
   </div>
 </div>
@@ -89,7 +92,7 @@
     <h2>Вы уверены, что хотите удалить студента?</h2>
     <h3>{{delStudent.lastName || ""}} {{delStudent.firstName || ""}} {{delStudent.middleName || ""}}</h3>
     <div class="button-block">
-    <button class="confirm__button button-block__button" (click)=" hidden = false; deleteStudent(delStudent)">Удалить</button>
+    <button class="confirm__button button-block__button" (click)="deleteStudent(delStudent)">Удалить</button>
     <button class="confirm__button confirm__button_cancel button-block__button" (click)="hidden = false">Отмена</button>
     </div>
   </div>

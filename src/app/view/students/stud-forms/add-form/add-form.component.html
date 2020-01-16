@@ -59,7 +59,7 @@
           >Оценка должна быть меньше {{form.get('mark').errors.max.max}} </small>
         </div>
       </div>
-      <button class="form-button" [ngClass]="{'form-button_enabled' : form.valid}" type="submit">Добавить</button>
+      <button class="form-button" [ngClass]="{'form-button_enabled' : form.valid && enableBtn}" type="submit">Добавить</button>
     </form>
   </div>
 </div>

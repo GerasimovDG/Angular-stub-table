@@ -8,7 +8,7 @@ export const serviceFactory = (route: ActivatedRoute, http: HttpClient) => {
 
   const tmp = route.snapshot.queryParams.debug;
   if (!!tmp) {
-        return new DataHandlerService();
+    return new DataHandlerService();
   }
   return new DataServerService(http);
 };

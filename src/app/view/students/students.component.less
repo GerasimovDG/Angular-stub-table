@@ -4,7 +4,6 @@
 @text-grey: #7f7365;
 
 
-
 .label {
   display: none;
   vertical-align: middle;
@@ -48,21 +47,26 @@
       right: 0;
       top: 0;
       margin: 1.5%;
+
       & input {
         position: absolute;
         z-index: -1;
         opacity: 0;
         margin: 10px 0 0 20px;
       }
+
       & input:checked + &__text:before {
         background: #9FD468;
       }
+
       & input:checked + &__text:after {
         left: 26px;
       }
+
       & input:focus + &__text:before {
-        box-shadow: inset 0 2px 3px rgba(0,0,0,.2), 0 0 0 3px rgba(255,255,0,.7);
+        box-shadow: inset 0 2px 3px rgba(0, 0, 0, .2), 0 0 0 3px rgba(255, 255, 0, .7);
       }
+
       &__text {
         position: relative;
         padding: 0 0 0 60px;
@@ -79,9 +83,10 @@
           height: 26px;
           border-radius: 13px;
           background: @bground;
-          box-shadow: inset 0 2px 3px rgba(0,0,0,.2);
+          box-shadow: inset 0 2px 3px rgba(0, 0, 0, .2);
           transition: .2s;
         }
+
         &:after {
           content: '';
           position: absolute;
@@ -91,7 +96,7 @@
           height: 22px;
           border-radius: 10px;
           background: #FFF;
-          box-shadow: 0 2px 5px rgba(0,0,0,.3);
+          box-shadow: 0 2px 5px rgba(0, 0, 0, .3);
           transition: .2s;
         }
       }
@@ -103,7 +108,7 @@
     margin-bottom: 10px;
     padding-left: 5px;
     border: 2px solid rgba(149, 66, 31, 0.3);
-    box-shadow: inset 1px 1px 3px rgba(0,0,0,0.5);
+    box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.5);
     outline: none;
     transition: .2s ease-in-out;
 
@@ -121,9 +126,10 @@
     &__input {
       width: 25%;
       box-shadow: none;
-      border: 2px solid rgba(149, 66, 31, 0.3)!important;
+      border: 2px solid rgba(149, 66, 31, 0.3) !important;
       border-radius: 15px 0 0 15px;
     }
+
     &__button {
       margin: 10px 0;
       padding: 5px;
@@ -147,10 +153,11 @@
         //box-shadow:0px -30px 0 @light_orange inset;
         color: #fff;
       }
+
       &_active,
       &:focus {
-        background-color:rgba(245, 100, 51, 0.8);
-        border-color:rgba(245, 100, 51, 0.8);
+        background-color: rgba(245, 100, 51, 0.8);
+        border-color: rgba(245, 100, 51, 0.8);
         color: rgb(255, 255, 255);
         box-shadow: inset 0 0 2px rgba(99, 59, 30, 0.2);
       }
@@ -162,15 +169,18 @@
     display: flex;
 
   }
+
   &-filter {
     flex-basis: 50%;
     margin-left: 20px;
     left: 20px;
+
     &__name {
       color: @orange;
       font-weight: bold;
       font-family: sans-serif;
     }
+
     &__input {
       padding: 5px;
       height: 20px;
@@ -185,6 +195,7 @@
     flex-basis: 50%;
     align-self: flex-end;
     position: relative;
+
     &__button {
       position: absolute;
       bottom: 0;
@@ -213,12 +224,13 @@
 
   .test {
     position: absolute;
-    width: 1200px!important;
+    width: 1200px !important;
   }
 
   &-body {
     .table {
       position: relative;
+
       th {
         padding: 10px;
         font-family: sans-serif;
@@ -227,11 +239,13 @@
 
       width: 100%;
       border-collapse: collapse;
+
       &-info {
         width: 100%;
         text-align: center;
-        background-color: lightgray!important;
+        background-color: lightgray !important;
         color: @text-grey;
+
         td {
           color: @text-grey
         }
@@ -245,16 +259,16 @@
 
         .active {
           border-radius: 5px 5px 0 0;
-          background-color: rgba(0,0,0,0.1);
+          background-color: rgba(0, 0, 0, 0.1);
 
           animation: activeIn .3s;
 
           @keyframes activeIn {
             from {
-              background-color: rgba(0,0,0,0);
+              background-color: rgba(0, 0, 0, 0);
             }
             to {
-              background-color: rgba(0,0,0,0.1);
+              background-color: rgba(0, 0, 0, 0.1);
             }
           }
         }
@@ -270,12 +284,15 @@
           color: #7f7365;
           font-family: sans-serif;
         }
+
         &__element {
           min-width: 110px;
         }
+
         .gift {
           color: #1c7f38;
         }
+
         //&:last-child tr td:first-child {
         //  border-radius: 0 0 0 15px;
         //}
@@ -287,13 +304,16 @@
         &_red {
           tr:first-child {
             background-color: rgba(153, 40, 42, 0.76);
+
             td {
-              color: #E1E3E0!important;
+              color: #E1E3E0 !important;
             }
           }
+
           &:last-child td:first-child {
             border-radius: 0 0 0 15px;
           }
+
           &:last-child td:last-child {
             border-radius: 0 0 15px 0;
           }
@@ -302,13 +322,16 @@
         &_green {
           tr:first-child {
             background-color: rgba(48, 153, 44, 0.76);
+
             td {
-              color: #E1E3E0!important;
+              color: #E1E3E0 !important;
             }
           }
+
           &:last-child td:first-child {
             border-radius: 0 0 0 15px;
           }
+
           &:last-child td:last-child {
             border-radius: 0 0 15px 0;
           }
@@ -321,6 +344,7 @@
         justify-content: center;
         align-items: center;
         padding: 0;
+
         &:focus ~ .hidden {
           display: block;
         }
@@ -353,21 +377,27 @@
             background-color: #555;
             z-index: 1;
           }
+
           &:after {
             transform: rotate(45deg);
           }
+
           &:before {
             transform: rotate(-45deg);
           }
+
           &:active ~ .hidden {
             display: block;
           }
+
           &:hover {
             background-color: #555;
           }
+
           &:hover:after {
             background-color: #ff5862;
           }
+
           &:hover:before {
             background-color: #ff5862;
           }
@@ -380,6 +410,7 @@
         align-items: center;
         padding: 0;
         outline: none;
+
         &__button {
           outline: none;
           width: 1rem;
@@ -412,7 +443,7 @@
   bottom: 0;
   width: 100%;
   height: 100vh;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.5);
   display: none;
 
   animation: hiddenOut .2s;
@@ -437,6 +468,23 @@
       to {
         opacity: 1;
       }
+    }
+  }
+}
+
+.button-block {
+  display: flex;
+  justify-content: space-evenly;
+
+  width: 90%;
+  margin: 0 auto;
+
+
+  &__button {
+    padding: .5rem 1.5rem;
+
+    &:focus {
+      opacity: .2;
     }
   }
 }
@@ -469,18 +517,6 @@
     color: @text-grey;
     margin: 0;
   }
-  .button-block {
-    display: flex;
-    justify-content: space-evenly;
-
-    width: 90%;
-    margin: 0 auto;
-
-
-    &__button {
-      padding: .5rem 1.5rem;
-    }
-  }
 
   &__button {
 
@@ -510,6 +546,57 @@
         border: 1px solid #9a9a9a;
       }
     }
+  }
+}
+
+.loading {
+  text-align: center;
+
+  &__text {
+    color: @orange;
+    font-weight: bold;
+  }
+}
+
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  text-align: center;
+  width: 80px;
+  height: 80px;
+}
+
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border: 8px solid @orange;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: @orange transparent transparent transparent;
+}
+
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
 

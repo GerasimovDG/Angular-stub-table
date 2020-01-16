@@ -12,9 +12,14 @@ export class DataServerService extends Data {
     super();
   }
 
-  addStudent(student: Student): Observable<Student> {
+  pushOnHard(student: Student): void {
     this.lastId = student.id;
     this.allStuds.push(student);
+  }
+
+  addStudent(student: Student): Observable<Student> {
+    // this.lastId = student.id;
+    // this.allStuds.push(student);
     return this.http.post<Student>(environment.apiUrl + "/items", student);
   }
 
@@ -31,7 +36,7 @@ export class DataServerService extends Data {
   }
 
   editStudent(student: Student): Observable<Student[]> {
-     return this.http.put<Student[]>(`${environment.apiUrl}/items/${student.id}`, student);
+    return this.http.put<Student[]>(`${environment.apiUrl}/items/${student.id}`, student);
   }
 
   set lastId(id: number) {

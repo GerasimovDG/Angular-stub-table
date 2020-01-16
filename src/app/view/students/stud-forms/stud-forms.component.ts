@@ -15,19 +15,21 @@ export class StudFormsComponent implements OnInit {
 
   protected form: FormGroup;
   protected newStudent: Student;
+  protected enableBtn = true;
 
   constructor(protected mData: Data,
               protected route: ActivatedRoute,
               protected router: Router,
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
-    this.form = new FormGroup( {
-      fio: new FormGroup( {
+    this.form = new FormGroup({
+      fio: new FormGroup({
         lastName: new FormControl("", [Validators.required]),
         firstName: new FormControl("", [Validators.required]),
         middleName: new FormControl("", [Validators.required])
-      }, [Validators.required, MyValidators.restrictedFIO ]),
+      }, [Validators.required, MyValidators.restrictedFIO]),
       birthday: new FormControl("", [Validators.required, MyValidators.restrictedDate]),
       mark: new FormControl("", [Validators.required, Validators.max(5), Validators.min(0)]),
     });
@@ -38,7 +40,7 @@ export class StudFormsComponent implements OnInit {
     if (this.form.valid) {
       const data = {...this.form.value};
       const value = data.mark.toString().split("");
-      data.mark = +value.filter( el => el !== "," && el !== "." ).join(".");
+      data.mark = +value.filter(el => el !== "," && el !== ".").join(".");
 
       this.newStudent = new Student(
         this.mData.lastId + 1,
