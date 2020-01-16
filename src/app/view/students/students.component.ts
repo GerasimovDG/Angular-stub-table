@@ -193,9 +193,11 @@ export class StudentsComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.students$) {
       this.students$.unsubscribe();
+      this.students$ = null;
     }
     if (this.deleteStudent$) {
       this.deleteStudent$.unsubscribe();
+      this.deleteStudent$ = null;
     }
   }
 }

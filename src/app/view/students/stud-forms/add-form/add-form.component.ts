@@ -35,6 +35,7 @@ export class AddFormComponent extends StudFormsComponent implements OnInit, OnDe
   ngOnDestroy(): void {
     if (this.addStudent$) {
       this.addStudent$.unsubscribe();
+      this.addStudent$ = null;
     }
   }
 }

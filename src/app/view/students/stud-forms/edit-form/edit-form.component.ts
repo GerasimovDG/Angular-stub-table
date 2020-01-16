@@ -88,9 +88,11 @@ export class EditFormComponent extends StudFormsComponent implements OnInit, OnD
   ngOnDestroy(): void {
     if (this.students$) {
       this.students$.unsubscribe();
+      this.students$ = null;
     }
     if (this.editStudent$) {
       this.editStudent$.unsubscribe();
+      this.editStudent$ = null;
     }
   }
 }
