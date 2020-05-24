@@ -1,4 +1,5 @@
-# StudTable
+# StudTable - таблица студентов
+## Посмотреть работу можно [здесь](https://gerasimovdg.github.io/stud-table/ "gerasimovdg.github.io/stud-table/")
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.18.
 
